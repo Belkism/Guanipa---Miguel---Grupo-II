@@ -1,0 +1,36 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #1f1f2eee;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.card{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    
+}
+
+input, 
+button{
+    width: 80%;
+    text-align: center;
+    margin: 5px;
+}

@@ -1,0 +1,156 @@
+body {
+    margin: 0;
+    background-color: #264768;
+}
+
+nav {
+    width: 100%;
+}
+
+.contenedor {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: whitesmoke;
+    padding: 20px 30px;
+}
+
+
+/* Imagen logo y titulo */
+.contenedor-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.contenedor img {
+    width: 60px;
+    display: block;
+}
+
+#btnLogo {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.texto-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.titulo-app {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #264768;
+    line-height: 1.1;
+}
+
+.subtitulo-app {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.85rem;
+    color: #5a5a5a;
+    line-height: 1.1;
+}
+
+
+/*========  Menú  (Categoria/Carrito/ admin) ========*/
+.menu {
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.menu li {
+    list-style: none;
+}
+
+/* Mismo estilo para links y botones */
+.menu a,
+.menu button {
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    font: inherit;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+
+    color: #264768;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.menu a:hover,
+.menu button:hover {
+    color: #6a93bb;
+}
+
+
+.dropdown {
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    min-width: 180px;
+    background: whitesmoke;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+
+    margin: 0;
+    padding: 0;
+}
+
+.submenu li {
+    width: 100%;
+}
+
+.submenu button {
+    width: 100%;
+    text-align: left;
+    padding: 10px 15px;
+}
+
+.dropdown:hover .submenu {
+    display: block;
+}
+
+/*======= Galeria Productos =============*/
+.imagen-producto {
+    height: 320px;
+    width: 100%;
+    object-fit: contain;
+    padding: 10px;
+}
+
+.card-producto {
+    height: 100%;
+    width: 80%;
+    margin: 10px auto;
+    background-color:  whitesmoke;
+}
+
+.descripcion-producto {
+    height: 100px;
+    overflow: hidden;
+}
+
+.precio-producto {
+    text-align: center;
+}
+
+.btn-carrito {
+    align-self: center;
+}

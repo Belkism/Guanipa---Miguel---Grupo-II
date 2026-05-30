@@ -1,21 +1,27 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
+
 const app = express();
+
 
 const path = require("path");
 const sequelize = require("./database/db.js");
 const PORT = process.env.PORT || 3000;
 
 const { syncDB } = require("./models/index.js")
+const productosRoutes = require("./routes/productos.routes");
+
 let server = null
 let shuttingDown = false
 
+app.use(cors());
 // servir archivos estáticos desde ruta absoluta dinamica
 app.use(express.static(path.join(__dirname, "public")));
 
 
 
-
+app.use("/productos", productosRoutes);
 
 
 const startServer = async () => {

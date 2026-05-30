@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/productos.css">
+    <link rel="icon" href="./favicon1.jpg" type="image/png">
+</head>
+<body>
+
+    <header>
+        <nav class="nav">
+            <div class="contenedor">
+                <div class="contenedor-logo">
+                    <button id="btnLogo">
+                        <img src="./favicon2.jpg" alt="logoEmpresa">
+                    </button>   
+                    <div class="texto-logo">
+                        <span class="titulo-app">
+                            Protectium App
+                        </span>
+
+                        <span class="subtitulo-app">
+                            Licencias originales, seguridad garantizada
+                        </span>
+                    </div>
+                </div>
+                  
+                <ul class="menu">
+                    <li class="dropdown">
+                        <button id="btnMenu">
+                            Categorías
+                        </button>
+                    
+                        <ul class="submenu">
+                            <li><button id="btnSeguridad" data-categoria="seguridad">Seguridad</button></li>
+                            <li><button id="btnProductividad" data-categoria="productividad">Productividad</button></li>
+                        </ul>
+                    </li>
+                     <li>
+                        <a class="linkCarrito" href="carrito.html">
+                            Carrito
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="linkLogin" href="login.html">                  
+                            Login Admin
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+
+    <div id="contenedorProductos">
+
+
+    </div>
+
+    <div id="paginacion">
+        
+    </div>
+ 
+    
+
+    
+    <script src="./js/productos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>   
+</body>
+</html>

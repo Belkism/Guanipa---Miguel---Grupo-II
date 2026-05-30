@@ -10,8 +10,8 @@ USE protectiumapp;
 -- TABLA CATEGORIAS
 -- =========================
 CREATE TABLE categorias (
-    id INT NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(45) NOT NULL,
+    id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    tipo VARCHAR(255) NOT NULL,
     createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     
@@ -22,14 +22,14 @@ CREATE TABLE categorias (
 -- TABLA PRODUCTOS
 -- =========================
 CREATE TABLE productos (
-    id INT NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(100) NOT NULL,
-    descripcion VARCHAR(1000) NOT NULL,
-    imagen VARCHAR(100) NOT NULL,
-    precio DECIMAL(10,2) NOT NULL,
-    stock INT NOT NULL,
+    id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    descripcion TEXT NULL,
+    imagen VARCHAR(255) NOT NULL,
+    precio FLOAT NOT NULL,
+    stock INT NULL,
     activo TINYINT(1) NOT NULL DEFAULT 1,
-    categoria_id INT NOT NULL,
+    categoria_id BIGINT(20) UNSIGNED NOT NULL,
     createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
@@ -46,11 +46,15 @@ CREATE TABLE productos (
 -- USUARIOS
 -- =========================
 CREATE TABLE usuarios (
-    id INT NOT NULL AUTO_INCREMENT,
-    correo VARCHAR(100) NOT NULL UNIQUE,
-    contrasena VARCHAR(255) NOT NULL,
-    rol VARCHAR(20) NOT NULL DEFAULT 'user',
-    fecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(200) NOT NULL,
+    correo VARCHAR(200) NOT NULL,
+    contrasena VARCHAR(200) NOT NULL,
+    telefono VARCHAR(200) NULL,
+    rol VARCHAR(255) NOT NULL,
+    activo TINYINT(1) NOT NULL,
+    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
@@ -58,11 +62,14 @@ CREATE TABLE usuarios (
 -- VENTAS 
 -- =========================
 CREATE TABLE ventas (
-    id INT NOT NULL AUTO_INCREMENT,
-    nombre_cliente VARCHAR(100) NOT NULL,
+    id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+    nombre_cliente VARCHAR(255) NOT NULL,
     total DECIMAL(10,2) NOT NULL DEFAULT 0,
-    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    usuario_id INT NULL,
+    fecha DATETIME NOT NULL,
+    usuario_id BIGINT(20) UNSIGNED NULL,
+    medio VARCHAR(50) NOT NULL,
+    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     PRIMARY KEY (id),
 
@@ -76,12 +83,13 @@ CREATE TABLE ventas (
 -- =========================
 -- DETALLE DE VENTAS
 -- =========================
-CREATE TABLE detalle_ventas (
-    id INT NOT NULL AUTO_INCREMENT,
-    venta_id INT NOT NULL,
-    producto_id INT NOT NULL,
-    cantidad INT NOT NULL,
-    precio_unitario DECIMAL(10,2) NOT NULL,
+CREATE TABLE detalle_Ventas (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    venta_id BIGINT(20) UNSIGNED NOT NULL,
+    producto_id BIGINT(20) UNSIGNED NOT NULL,
+    cantidad INT NOT NULL DEFAULT 1,
+    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     PRIMARY KEY (id),
 
@@ -102,7 +110,7 @@ CREATE TABLE detalle_ventas (
 -- =========================
 -- INSERTO CATEGORIAS
 -- =========================
-INSERT INTO categorias (id, nombre) VALUES
+INSERT INTO categorias (id, tipo) VALUES
 (1, 'Seguridad'),
 (2, 'Productividad');
 

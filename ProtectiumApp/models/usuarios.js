@@ -4,14 +4,25 @@ const { DataTypes } = require("sequelize")
 
 
 const usuarios = db.define("usuarios", {
+    id: {
+        type: DataTypes.BIGINT.UNSIGNED,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+    },
 
-    correo: {type: DataTypes.STRING},
+    nombre: {type: DataTypes.STRING(200),allowNull: false,},
 
-    contrasena: {type: DataTypes.STRING},
 
-    rol: {type: DataTypes.STRING},
+    correo: {type: DataTypes.STRING(200),allowNull: false,},
 
-    activo: {type: DataTypes.BOOLEAN,}
+    contrasena: {type: DataTypes.STRING(200),allowNull: false,},
+
+    telefono: {type: DataTypes.STRING(200),allowNull: true,},
+
+    rol: {type: DataTypes.STRING,allowNull: false,},
+
+    activo: {type: DataTypes.BOOLEAN,allowNull: false,}
 
 })
 

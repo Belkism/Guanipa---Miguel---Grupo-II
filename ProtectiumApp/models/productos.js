@@ -3,21 +3,29 @@ const db = require("../database/db.js")
 const { DataTypes } = require("sequelize")
 
 
-const productos = db.define("productos", {
+const productos = db.define("productos",
+    {
 
-    nombre: {type: DataTypes.STRING},
+        id:{
+            type: DataTypes.BIGINT.UNSIGNED,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+        },
 
-    descripcion: {type: DataTypes.STRING(1000)},
+    nombre: {type: DataTypes.STRING, allowNull: false,},
 
-    imagen: {type: DataTypes.STRING},
+    descripcion: {type: DataTypes.TEXT,allowNull: true,},
 
-    precio: {type: DataTypes.DECIMAL(10,2)},
+    imagen: {type: DataTypes.STRING,allowNull: false,},
 
-    stock: {type: DataTypes.INTEGER},
+    precio: {type: DataTypes.FLOAT,allowNull: false,},
 
-    activo: {type: DataTypes.BOOLEAN},
+    stock: {type: DataTypes.INTEGER, allowNull: true,},
 
-    categoria_id: {type: DataTypes.INTEGER}
+    activo: {type: DataTypes.BOOLEAN,allowNull: false,},
+
+    categoria_id: {type: DataTypes.INTEGER,allowNull: false,}
 
 })
 

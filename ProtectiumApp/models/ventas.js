@@ -3,12 +3,27 @@ const { DataTypes } = require("sequelize")
 
 
 const ventas = db.define("ventas", {
+    id:{
+        type: DataTypes.BIGINT.UNSIGNED,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+    },
+    nombre_cliente: {type: DataTypes.STRING,allowNull: false},
 
-    nombre_cliente: {type: DataTypes.STRING},
+    total: {type: DataTypes.DECIMAL(10,2),allowNull: false},
 
-    total: {type: DataTypes.DECIMAL(10,2)},
+    fecha: {type: DataTypes.DATE,allowNull: false},
 
-    fecha: {type: DataTypes.DATE}
+    usuario_id: {
+        type: DataTypes.BIGINT.UNSIGNED,
+        allowNull: true,
+    },
+
+    medio:{
+        type: DataTypes.STRING(50),
+        allowNull: false,
+    }
 
 })
 

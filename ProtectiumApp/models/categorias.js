@@ -3,8 +3,18 @@ const { DataTypes } = require("sequelize")
 
 
 const categorias = db.define("categorias", {
+    id: {
+            type: DataTypes.BIGINT.UNSIGNED,
+            primaryKey: true,
+            autoIncrement: true,
+        },
 
-    nombre: {type: DataTypes.STRING}
+
+    tipo:{
+        type: DataTypes.STRING,
+        allowNull: false,
+    }
+   
 
 })
 

@@ -5,14 +5,31 @@ const { DataTypes } = require("sequelize")
 
 const detalleVentas = db.define("detalle_Ventas", {
 
-    venta_id: {type: DataTypes.INTEGER},
+    id:{
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+    },
 
-    producto_id: {type: DataTypes.INTEGER},
+    venta_id: {
+                type: DataTypes.BIGINT.UNSIGNED,
+                allowNull: false,
+    },
 
-    cantidad: {type: DataTypes.INTEGER},
+    producto_id: {
+                type: DataTypes.BIGINT.UNSIGNED,
+                allowNull: false,
+    },
 
-    precio_unitario: {type: DataTypes.DECIMAL(10,2)}
+    cantidad: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 1,    
+    },
 
-})
+    }
+
+)
 
 module.exports = detalleVentas

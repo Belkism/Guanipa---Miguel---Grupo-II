@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (error) {
             aviso.textContent = error;
+            aviso.style.color = "red";
             return;
         }
 
@@ -16,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         sessionStorage.setItem("cliente", nombre);
 
-        window.location.href = "/productos.html";
+        window.location.href = "productos.html";
     })
 
 })

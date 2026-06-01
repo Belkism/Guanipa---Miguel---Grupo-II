@@ -1,24 +1,26 @@
+// 1. Estado Global de la aplicación
+let arrayDatos = []; // Se llenará con la respuesta del Servidor/API
 
-let arrayDatos = [];
+const estadoPaginacion = {
+    seguridad: { paginaActual: 1, productosPorPagina: 3 },
+    productividad: { paginaActual: 1, productosPorPagina: 3 }
+};
 
+// 2. Petición Asíncrona original a tu Backend/API
 const obtenerProductos = async () => {
     try {
-
         let respuesta = await fetch("/productos");
         
         if (!respuesta.ok) {
             switch (respuesta.status) {
                 case 400:
                     throw new Error("Solicitud incorrecta");
-
                 default:
                     throw new Error(`Error ${respuesta.status}`);
             }
         }
         let datos = await respuesta.json();        
-       
-        arrayDatos = [...datos];
-              
+        arrayDatos = [...datos]; // Guardamos los productos reales detectados
                    
     } catch (error) {
         console.error(error);
@@ -26,61 +28,164 @@ const obtenerProductos = async () => {
     }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-    const btnLogo = document.getElementById("btnLogo");
+// 3. Función unificada que divide por categoría y aplica Paginación
+function renderizarSeccion(categoria) {
+    // Armar dinámicamente los IDs que coinciden con tu HTML
+    const idContenedor = `contenedor${categoria.charAt(0).toUpperCase() + categoria.slice(1)}`;
+    const idPaginacion = `paginacion${categoria.charAt(0).toUpperCase() + categoria.slice(1)}`;
+    
+    const contenedor = document.getElementById(idContenedor);
+    const contenedorPag = document.getElementById(idPaginacion);
+    
+    if (!contenedor || !contenedorPag) return;
 
-    btnLogo.addEventListener("click", (e) => {
+    // 1. FILTRAR: Tomar del array global solo los de la categoría correspondiente
+    // Nota: Asegúrate de que en tu base de datos el campo se llame exactamente "seguridad" o "productividad"
+   const productosFiltrados = arrayDatos.filter(p => {
+    // Verificamos que el producto y su categoria_id existan
+    if (p && p.categoria_id !== undefined && p.categoria_id !== null) {
+        
+        // Si la sección que estamos renderizando es "seguridad", buscamos el ID 1
+        if (categoria === "seguridad") {
+            return Number(p.categoria_id) === 1;
+        }
+        
+        // Si la sección es "productividad", buscamos el ID 2
+        if (categoria === "productividad") {
+            return Number(p.categoria_id) === 2;
+        }
+    }
+    return false;
+});;
+    
+    // 2. PAGINAR: Calcular cortes (Slice)
+    const config = estadoPaginacion[categoria];
+    const indiceInicio = (config.paginaActual - 1) * config.productosPorPagina;
+    const indiceFin = indiceInicio + config.productosPorPagina;
+    const productosPagina = productosFiltrados.slice(indiceInicio, indiceFin);
 
-        sessionStorage.clear();
+    // 3. DIBUJAR: Estructura de tarjetas (Usando tus clases de Bootstrap y propiedades)
+    contenedor.innerHTML = `<div class="row g-4" id="grid-${categoria}"></div>`;
+    const grid = document.getElementById(`grid-${categoria}`);
 
-        window.location.href = "index.html";
-    });
-
-    //Valida que exista nombre 
-    const nombre = sessionStorage.getItem("cliente");
-
-    if (!nombre) {
-        window.location.href = "index.html";
+    if (productosPagina.length === 0) {
+        grid.innerHTML = `<p class="text-muted text-center col-12">No hay productos en esta categoría.</p>`;
+        return;
     }
 
-    await obtenerProductos();
-    renderizarProductos(arrayDatos);
+    productosPagina.forEach(producto => {
+        // Lógica del carrito con LocalStorage
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        const existeEnCarrito = carrito.some(item => item.id === producto.id);
 
-})
-
-const renderizarProductos = (datos) => {
-    let divContenedor = document.getElementById("contenedorProductos");
-    divContenedor.innerHTML = "";
-
-    let cards = '<div class="container mt-4"><div class="row g-4">';
-    datos.forEach(producto => {
-        cards += `
-        <div class="col-12 col-md-6">
-            <div class="card card-producto shadow-sm">
-                <img src="${producto.imagen}" 
-                    class="card-img-top imagen-producto" 
-                    alt="Imagen del producto">
-
+        grid.innerHTML += `
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card card-producto h-100 shadow-sm text-dark bg-white">
+                <img src="${producto.imagen}" class="card-img-top imagen-producto p-3" alt="Imagen de ${producto.nombre}" style="max-height: 180px; object-fit: contain;">
                 <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">${producto.nombre}</h5>
-
-                    <p class="card-text text-muted descripcion-producto">
-                        ${producto.descripcion}
-                    </p>
-
-                    <h4 class="precio-producto text-primary mb-3">
-                        $ ${producto.precio}
-                    </h4>
-
-                    <button class="btn btn-primary mt-auto btn-carrito">
-                        Agregar al carrito
-                    </button>
+                    <h5 class="card-title fs-6 fw-bold">${producto.nombre}</h5>
+                    <p class="card-text text-muted small descripcion-producto">${producto.descripcion}</p>
+                    <h4 class="precio-producto text-primary mt-auto mb-3">$ ${producto.precio}</h4>
+                    
+                    <div class="mt-2">
+                        ${existeEnCarrito ? 
+                            `<button class="btn btn-danger btn-sm w-100" onclick="quitarDelCarrito(${producto.id}, '${categoria}')">Quitar del carrito</button>` : 
+                            `<button class="btn btn-primary btn-sm w-100 btn-carrito" onclick="agregarAlCarrito(${producto.id}, '${categoria}')">Agregar al carrito</button>`
+                        }
+                    </div>
                 </div>
             </div>
         </div>`;
-        
     });
 
-    divContenedor.innerHTML = cards;
-    
+    // 4. BOTONERA: Dibujar la paginación de esta sección
+    renderizarBotoneraSeccion(categoria, productosFiltrados.length, contenedorPag);
 }
+
+// 4. Generador dinámico de botones numéricos
+function renderizarBotoneraSeccion(categoria, totalItems, contenedorPag) {
+    const config = estadoPaginacion[categoria];
+    const totalPaginas = Math.ceil(totalItems / config.productosPorPagina);
+    contenedorPag.innerHTML = "";
+
+    if (totalPaginas <= 1) return;
+
+    let navHTML = `<nav><ul class="pagination pagination-sm justify-content-center">`;
+
+    // Anterior
+    navHTML += `
+        <li class="page-item ${config.paginaActual === 1 ? 'disabled' : ''}">
+            <button class="page-link" onclick="cambiarPaginaSeccion('${categoria}', ${config.paginaActual - 1})">Anterior</button>
+        </li>
+    `;
+
+    // Números
+    for (let i = 1; i <= totalPaginas; i++) {
+        navHTML += `
+            <li class="page-item ${config.paginaActual === i ? 'active' : ''}">
+                <button class="page-link" onclick="cambiacambiarPaginaSeccion('${categoria}', ${i})">${i}</button>
+            </li>
+        `;
+    }
+
+    // Siguiente
+    navHTML += `
+        <li class="page-item ${config.paginaActual === totalPaginas ? 'disabled' : ''}">
+            <button class="page-link" onclick="cambiarPaginaSeccion('${categoria}', ${config.paginaActual + 1})">Siguiente</button>
+        </li>
+    `;
+
+    navHTML += `</ul></nav>`;
+    contenedorPag.innerHTML = navHTML;
+}
+
+// 5. Controladores de eventos expuestos a 'window' para los onclick inline
+window.cambiarPaginaSeccion = function(categoria, nuevaPagina) {
+    estadoPaginacion[categoria].paginaActual = nuevaPagina;
+    renderizarSeccion(categoria);
+};
+
+window.agregarAlCarrito = function(idProducto, categoria) {
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const producto = arrayDatos.find(p => p.id === idProducto);
+    
+    if (producto && !carrito.some(item => item.id === idProducto)) {
+        carrito.push(producto);
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+    }
+    renderizarSeccion(categoria);
+};
+
+window.quitarDelCarrito = function(idProducto, categoria) {
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    carrito = carrito.filter(item => item.id !== idProducto);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    
+    renderizarSeccion(categoria);
+};
+
+// 6. Listener de arranque DOMContentLoaded (Tu lógica de inicio preservada)
+document.addEventListener("DOMContentLoaded", async () => {
+    // Control del Logo
+    const btnLogo = document.getElementById("btnLogo");
+    if (btnLogo) {
+        btnLogo.addEventListener("click", () => {
+            sessionStorage.clear();
+            window.location.href = "index.html";
+        });
+    }
+
+    // Validar sesión del cliente
+    const nombre = sessionStorage.getItem("cliente");
+    if (!nombre) {
+        window.location.href = "index.html";
+        return; // Detiene la ejecución si no está logueado
+    }
+
+    // Traer los datos desde la API
+    await obtenerProductos();
+
+    // Renderizar de forma separada e independiente ambas secciones
+    renderizarSeccion("seguridad");
+    renderizarSeccion("productividad");
+});

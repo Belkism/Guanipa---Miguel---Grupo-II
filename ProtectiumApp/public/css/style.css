@@ -8,9 +8,20 @@ body{
     background-color: #264768;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
 }
 
 
@@ -37,6 +48,16 @@ button{
     max-width: 350px;
     text-align: center;
     margin: 5px;
+}
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: #5defef;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 

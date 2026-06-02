@@ -30,13 +30,19 @@ const obtenerProductos = async () => {
 
 // 3. Función unificada que divide por categoría y aplica Paginación
 function renderizarSeccion(categoria) {
+
     // Armar dinámicamente los IDs que coinciden con tu HTML
     const idContenedor = `contenedor${categoria.charAt(0).toUpperCase() + categoria.slice(1)}`;
     const idPaginacion = `paginacion${categoria.charAt(0).toUpperCase() + categoria.slice(1)}`;
+
     
     const contenedor = document.getElementById(idContenedor);
     const contenedorPag = document.getElementById(idPaginacion);
-    
+
+    //Muestro solo la seccion actual
+    const seccion = contenedor.closest("section");
+    seccion.classList.remove("oculto");
+
     if (!contenedor || !contenedorPag) return;
 
     // 1. FILTRAR: Tomar del array global solo los de la categoría correspondiente
@@ -74,8 +80,8 @@ function renderizarSeccion(categoria) {
     }
 
     productosPagina.forEach(producto => {
-        // Lógica del carrito con LocalStorage
-        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        // Lógica del carrito con sessionStorage
+        const carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
         const existeEnCarrito = carrito.some(item => item.id === producto.id);
 
         grid.innerHTML += `
@@ -146,35 +152,33 @@ window.cambiarPaginaSeccion = function(categoria, nuevaPagina) {
 };
 
 window.agregarAlCarrito = function(idProducto, categoria) {
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    let carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
     const producto = arrayDatos.find(p => p.id === idProducto);
     
     if (producto && !carrito.some(item => item.id === idProducto)) {
-        carrito.push(producto);
-        localStorage.setItem("carrito", JSON.stringify(carrito));
+        // Agregamos el producto y el atributo cantidad
+        carrito.push({...producto, cantidad : 1});
+        sessionStorage.setItem("carrito", JSON.stringify(carrito));
     }
     renderizarSeccion(categoria);
 };
 
 window.quitarDelCarrito = function(idProducto, categoria) {
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    let carrito = JSON.parse(sessionStorage.getItem("carrito")) || [];
     carrito = carrito.filter(item => item.id !== idProducto);
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+    sessionStorage.setItem("carrito", JSON.stringify(carrito));
     
     renderizarSeccion(categoria);
 };
 
+window.volverAInicio = () => {
+    sessionStorage.clear();
+    window.location.href = "index.html";
+}
+
 // 6. Listener de arranque DOMContentLoaded (Tu lógica de inicio preservada)
 document.addEventListener("DOMContentLoaded", async () => {
-    // Control del Logo
-    const btnLogo = document.getElementById("btnLogo");
-    if (btnLogo) {
-        btnLogo.addEventListener("click", () => {
-            sessionStorage.clear();
-            window.location.href = "index.html";
-        });
-    }
-
+    
     // Validar sesión del cliente
     const nombre = sessionStorage.getItem("cliente");
     if (!nombre) {
@@ -185,7 +189,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Traer los datos desde la API
     await obtenerProductos();
 
-    // Renderizar de forma separada e independiente ambas secciones
-    renderizarSeccion("seguridad");
-    renderizarSeccion("productividad");
+    //Escucha clicks en cualquier elemento que tenga data-categoria (Cards y botones en menu)
+    document.addEventListener("click", (e) => {
+        const elemento = e.target.closest("[data-categoria]");      
+        if(!elemento) return;
+
+        // Ocultar todas las secciones antes de renderizar nuevamente
+        document
+        .querySelectorAll(".categoria-section")
+        .forEach(seccion => {
+            seccion.classList.add("oculto");
+        });
+        
+        //Mostramos la categoria seleccionada
+        let categoria = elemento.dataset.categoria;
+        renderizarSeccion(categoria);
+        
+    });
+
 });

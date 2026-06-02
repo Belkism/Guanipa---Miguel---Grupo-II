@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: #264768;
+    box-sizing: border-box;
 }
 
 nav {
@@ -95,70 +96,31 @@ nav {
 }
 
 
-.dropdown {
-    position: relative;
-    z-index: 10;
+/* MODAL */
+.modal-oculto {
+    display: none;
 }
 
-.submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
+.modal-visible {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
     left: 0;
 
-    min-width: 180px;
-    background: whitesmoke;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-
-    margin: 0;
-    padding: 0;
-}
-
-.submenu li {
     width: 100%;
-}
-
-.submenu button {
-    width: 100%;
-    text-align: left;
-    padding: 10px 15px;
-}
-
-.dropdown:hover .submenu {
-    display: block;
-}
-
-/*======= Galeria Productos =============*/
-h2{
-    color: whitesmoke;
-}
-.imagen-producto {
-    height: 320px;
-    width: 100%;
-    object-fit: contain;
-    padding: 10px;
-}
-
-.card-producto {
     height: 100%;
-    width: 80%;
-    margin: 10px auto;
-    background-color:  whitesmoke;
+
+    background: rgba(0, 0, 0, 0.7);
+
+    z-index: 1000;
 }
 
-.descripcion-producto {
-    height: 100px;
-    overflow: hidden;
-}
-
-.precio-producto {
-    text-align: center;
-}
-
-.btn-carrito {
-    align-self: center;
-}
-
-.oculto {
-    display: none;
+.modal-contenido {
+    background: whitesmoke;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 350px;
 }

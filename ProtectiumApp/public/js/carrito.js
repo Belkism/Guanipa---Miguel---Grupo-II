@@ -130,14 +130,51 @@ window.cancelarCompra = () => {
     modal.classList.remove("modal-visible");
 }
 
-window.confirmarCompra = () => {
+window.confirmarCompra = async () => {
     const carrito = obtenerCarrito();
+    const nombreClienteInput = document.getElementById("nombre-cliente");
+    const medioPagoSelect = document.getElementById("medio-pago");
+    const nombreCliente = nombreClienteInput ? nombreClienteInput.value.trim() : "";
+    const medioPago = medioPagoSelect ? medioPagoSelect.value : "";
 
-    alert("Compra realizada con éxito");
+    if (!Array.isArray(carrito) || carrito.length === 0) {
+        alert("El carrito está vacío");
+        return;
+    }
 
-    //Redirijo a pantalla ticket
-    window.location.href = "ticket.html";
-    // Logica para mostrar ticket y descargarlo
+    if (!nombreCliente) {
+        alert("Debes ingresar el nombre del cliente");
+        return;
+    }
+
+    try {
+        const respuesta = await fetch("/ticket/checkout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                carrito,
+                nombre_cliente: nombreCliente,
+                medio: medioPago || "No especificado",
+            }),
+        });
+
+        if (!respuesta.ok) {
+            throw new Error("No se pudo registrar la compra");
+        }
+
+        const data = await respuesta.json();
+
+        alert("Compra realizada con éxito");
+        sessionStorage.removeItem("carrito");
+
+        // Redirijo a pantalla ticket con el ID persistido
+        window.location.href = `/ticket?ids=${data.idticket}`;
+    } catch (error) {
+        console.error(error);
+        alert("No se pudo completar la compra. Intenta nuevamente.");
+    }
 }
 
 

@@ -48,6 +48,19 @@
                 <div class="modal-contenido">
                     <h4>Confirmar compra</h4>
                     <p>¿Desea confirmar la compra?</p>
+                    <div class="mb-3">
+                        <label for="nombre-cliente" class="form-label">Nombre del cliente</label>
+                        <input type="text" id="nombre-cliente" class="form-control" placeholder="Ej: Juan Perez" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="medio-pago" class="form-label">Medio de pago</label>
+                        <select id="medio-pago" class="form-select">
+                            <option value="">Seleccionar...</option>
+                            <option value="Efectivo">Efectivo</option>
+                            <option value="Tarjeta">Tarjeta</option>
+                            <option value="Transferencia">Transferencia</option>
+                        </select>
+                    </div>
                     <div class="d-flex justify-content-end gap-2">
                         <button class="btn btn-secondary"
                             onclick="cancelarCompra()">

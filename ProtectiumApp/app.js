@@ -11,17 +11,27 @@ const PORT = process.env.PORT || 3000;
 
 const { syncDB } = require("./models/index.js")
 const productosRoutes = require("./routes/productos.routes");
+const ticketRoutes = require("./routes/ticket.router");
+const ticketController = require("./controllers/ticketControllers");
 
 let server = null
 let shuttingDown = false
 
 app.use(cors());
+app.use(express.json());
 // servir archivos estáticos desde ruta absoluta dinamica
 app.use(express.static(path.join(__dirname, "public")));
 
 
 
 app.use("/productos", productosRoutes);
+app.use("/ticket", ticketRoutes);
+
+// Endpoints explícitos de respaldo para ticket
+app.post("/ticket/checkout", ticketController.checkoutTicket);
+app.get("/ticket/pdf", ticketController.descargarticket);
+app.get("/ticket/data", ticketController.getticketData);
+app.get("/ticket", ticketController.getticket);
 
 
 const startServer = async () => {

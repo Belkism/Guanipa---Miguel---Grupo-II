@@ -1,42 +1,43 @@
+// Configuración inicial
 require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
-
-const app = express();
-
-
 const path = require("path");
-const sequelize = require("./database/db.js");
-const PORT = process.env.PORT || 3000;
 
+// Base de datos
+const sequelize = require("./database/db.js");
 const { syncDB } = require("./models/index.js")
+
+// Rutas importadas
 const productosRoutes = require("./routes/productos.routes");
 const ticketRoutes = require("./routes/ticket.router");
-const ticketController = require("./controllers/ticketControllers");
 
+// App y configuración
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Variables globales
 let server = null
 let shuttingDown = false
 
+// Middlewares
 app.use(cors());
 app.use(express.json());
 // servir archivos estáticos desde ruta absoluta dinamica
 app.use(express.static(path.join(__dirname, "public")));
 
 
-
+// Rutas
 app.use("/productos", productosRoutes);
 app.use("/ticket", ticketRoutes);
 
-// Endpoints explícitos de respaldo para ticket
-app.post("/ticket/checkout", ticketController.checkoutTicket);
-app.get("/ticket/pdf", ticketController.descargarticket);
-app.get("/ticket/data", ticketController.getticketData);
-app.get("/ticket", ticketController.getticket);
 
 
+// Inicio del servidor
 const startServer = async () => {
     try {
-        // Esto sincroniza la base de datos, solo se usa en desarrollo     
+    
         await syncDB();
     
         server = app.listen(PORT, () => {
@@ -49,6 +50,7 @@ const startServer = async () => {
     }
 }
 
+// Apagado controlado
 const shutdown = async (signal) => {
     if (shuttingDown) return
     shuttingDown = true
@@ -77,7 +79,9 @@ const shutdown = async (signal) => {
     }
 }
 
+// Eventos del proceso
 process.on("SIGINT", () => shutdown("SIGINT"))
 process.on("SIGTERM", () => shutdown("SIGTERM"))
 
+//Inicio
 startServer();

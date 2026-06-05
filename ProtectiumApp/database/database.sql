@@ -134,3 +134,17 @@ INSERT INTO productos (nombre, descripcion, imagen, precio, stock, activo, categ
 ('Kaspersky Standard Para 10 PCs por 2 Años','Licencia Kaspersky Standard para 10 dispositivos por 2 años Protección básica contra virus y amenazas digitales Activación 100% original por internet Compatible con Windows, Mac y dispositivos móviles Incluye protección en tiempo real y control parental Soporte técnico y garantía incluidos Entrega inmediata por correo electrónico con guia de instalación.',"/images/productos/Kaspersky.png",148840,14,1,1,NOW(),NOW()),
 ('Microsoft Visio 2021','Licencia para activar Visio Pro 2021 Apta para 64 bits y 32 bits Versión Pro apta para personas, empresas e instituciones En caso de tener instalado un office debe comprar este producto con la misma versión y edición de su office, verifique la paquetería de office antes de hacer su compra Si tiene Office 365 es compatible con esta version de Visio Todos nuestros productos son originales y cuentan con garantía y soporte técnico Entrega inmediata directo a tu correo electrónico junto con manual de instalación.',"/images/productos/Visio2021Profesional.png",29530,18,1,2,NOW(),NOW()),
 ('Office 2021 Hogar y Empresas Mac','Licencia para Office Hogar y Empresas Mac 2021 Funciona exclusivamente en Mac Descargue el software desde el sitio web oficial Clave de licencia de 25 dígitos Incluye Word, Excel, PowerPoint, Outlook Todos nuestros productos son originales y cuentan con garantía y soporte técnico Entrega inmediata directo a tu correo electrónico junto con manual de instalación.',"/images/productos/OfficeHogarYEmpresa.png",156800,8,1,2,NOW(),NOW());
+
+
+-- =========================
+-- INSERTO USUARIO PRUEBA
+-- =========================
+INSERT INTO usuarios (id, nombre, correo, contrasena, telefono, rol, activo) VALUES (
+    1,
+    'Juan',
+    'admin@test.com',
+    '123456',
+    '3456123',
+    'admin',
+    0
+);

@@ -24,6 +24,10 @@ const usuarios = db.define("usuarios", {
 
     activo: {type: DataTypes.BOOLEAN,allowNull: false,}
 
+}, {
+    timestamps: true
 })
+
+
 
 module.exports = usuarios

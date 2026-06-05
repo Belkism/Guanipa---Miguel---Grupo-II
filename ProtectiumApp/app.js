@@ -7,15 +7,19 @@ const path = require("path");
 
 // Base de datos
 const sequelize = require("./database/db.js");
-const { syncDB } = require("./models/index.js")
+const { syncDB } = require("./models/index.js");
+
 
 // Rutas importadas
-const productosRoutes = require("./routes/productos.routes");
-const ticketRoutes = require("./routes/ticket.router");
+const productosRoutes = require("./routes/productos.routes.js");
+const ticketRoutes = require("./routes/ticket.router.js");
+const authRoutes = require("./routes/auth.routes.js")
 
 // App y configuración
 const app = express();
 const PORT = process.env.PORT || 3000;
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 // Variables globales
 let server = null
@@ -26,20 +30,23 @@ app.use(cors());
 app.use(express.json());
 // servir archivos estáticos desde ruta absoluta dinamica
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
+
 
 
 // Rutas
 app.use("/productos", productosRoutes);
 app.use("/ticket", ticketRoutes);
+app.use("/auth", authRoutes);
 
 
 
 // Inicio del servidor
 const startServer = async () => {
     try {
-    
+        
         await syncDB();
-    
+        
         server = app.listen(PORT, () => {
             console.log(`Servidor corriendo en http://localhost:${PORT}`)
         })

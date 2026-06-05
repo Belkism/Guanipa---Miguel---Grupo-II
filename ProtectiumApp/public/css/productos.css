@@ -29,7 +29,7 @@ nav {
     display: block;
 }
 
-#btnLogo {
+.contenedor button {
     background: transparent;
     border: none;
     padding: 0;

@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const btnContinuar = document.getElementById("btnContinuar");
+    const btnLoginAdmin = document.getElementById("btnLoginAdmin");
     const inputNombre = document.getElementById("nombre");
     const aviso = document.getElementById("aviso");
 
@@ -18,6 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("cliente", nombre);
 
         window.location.href = "productos.html";
+    })
+
+    btnLoginAdmin.addEventListener("click", () => {
+        window.location.href = "/auth/login";
     })
 
 })

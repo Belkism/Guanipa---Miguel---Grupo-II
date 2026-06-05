@@ -4,7 +4,7 @@ const authController = {
     mostrarLogin : (req, res) => {
         res.render("login");
     },
-
+    
     login : async (req, res) => {       
         const { correo, contrasena } = req.body;
         
@@ -21,7 +21,7 @@ const authController = {
             });
         }
 
-        res.redirect("/dashboard");
+        res.redirect("/admin/dashboard");
     }
 };
 

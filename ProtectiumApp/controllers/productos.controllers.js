@@ -1,25 +1,44 @@
 const { productos } = require("../models");
 
-const obtenerProductos = async (req, res) => {
+const productoController = {
+    obtenerProductos : async (req, res) => {
 
-    try {
+        try {
 
-        const listaProductos = await productos.findAll({raw:true});
+            const listaProductos = await productos.findAll({
+                where: {
+                    activo: true
+                },
+                raw: true
+            });
 
-        res.status(200).json(listaProductos);
+            res.status(200).json(listaProductos);
 
-    } catch (error) {
+        } catch (error) {
 
-        console.error(error);
+            console.error(error);
 
-        res.status(500).json({
-            mensaje: "Error al obtener productos"
+            res.status(500).json({
+                mensaje: "Error al obtener productos"
+            });
+        }
+    },
+
+    formEditar : async (req, res) => {
+        const producto = await productos.findByPk(req.params.id);
+
+        res.render("form", {
+            producto
         });
+    },
 
+    formCrear : (req, res) => {
+        res.render("form", {
+            producto: null
+        });
     }
 
 };
 
-module.exports = {
-    obtenerProductos
-};
+
+module.exports = productoController;

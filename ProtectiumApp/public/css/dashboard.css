@@ -73,8 +73,7 @@ nav {
 }
 
 /* Mismo estilo para links y botones */
-.menu a,
-.menu button {
+.menu a {
     background: transparent;
     border: none;
     padding: 0;
@@ -89,63 +88,22 @@ nav {
     cursor: pointer;
 }
 
-.menu a:hover,
-.menu button:hover {
+.menu a:hover {
     color: #6a93bb;
 }
 
 
-.dropdown {
-    position: relative;
-    z-index: 10;
-}
 
-.submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-
-    min-width: 180px;
-    background: whitesmoke;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-
-    margin: 0;
-    padding: 0;
-}
-
-.submenu li {
-    width: 100%;
-}
-
-.submenu button {
-    width: 100%;
-    text-align: left;
-    padding: 10px 15px;
-}
-
-.dropdown:hover .submenu {
-    display: block;
-}
 
 /*======= Galeria Productos =============*/
-.categoria-card {
-    cursor: pointer;
-    transition: transform 0.3s ease,
-                box-shadow 0.3s ease;
-}
-
-.categoria-card:hover {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 .5rem 1rem .25rem rgba(0,0,0,.25);
-}
 
 
-h2{
+h1, p, h2{
     color: whitesmoke;
 }
-.imagen-producto {
-    height: 320px;
+
+.container img {
+    height: 100px;
     width: 100%;
     object-fit: contain;
     padding: 10px;

@@ -13,7 +13,8 @@ const { syncDB } = require("./models/index.js");
 // Rutas importadas
 const productosRoutes = require("./routes/productos.routes.js");
 const ticketRoutes = require("./routes/ticket.router.js");
-const authRoutes = require("./routes/auth.routes.js")
+const authRoutes = require("./routes/auth.routes.js");
+const adminRoutes = require("./routes/admin.routes.js");
 
 // App y configuración
 const app = express();
@@ -38,6 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/productos", productosRoutes);
 app.use("/ticket", ticketRoutes);
 app.use("/auth", authRoutes);
+app.use("/admin", adminRoutes);
 
 
 

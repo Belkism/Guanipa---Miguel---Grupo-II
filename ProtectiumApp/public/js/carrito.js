@@ -8,6 +8,10 @@ const guardarCarrito = (carrito) => {
     sessionStorage.setItem("carrito", JSON.stringify(carrito));
 };
 
+const obtenerClienteGuardado = () => {
+    return (sessionStorage.getItem("cliente") || "").trim();
+};
+
 const quitarDelCarrito = (id) => {
     let carrito = obtenerCarrito();
     carrito = carrito.filter(producto => producto.id !== id);
@@ -119,6 +123,12 @@ window.volverAInicio = () => {
 window.quitarDelCarrito = quitarDelCarrito;
 
 window.abrirModal = () => {
+    const nombreClienteInput = document.getElementById("nombre-cliente");
+    const clienteGuardado = obtenerClienteGuardado();
+
+    if (nombreClienteInput && !nombreClienteInput.value.trim() && clienteGuardado) {
+        nombreClienteInput.value = clienteGuardado;
+    }
 
     modal.classList.add("modal-visible");
     modal.classList.remove("modal-oculto");
@@ -132,9 +142,10 @@ window.cancelarCompra = () => {
 
 window.confirmarCompra = async () => {
     const carrito = obtenerCarrito();
+    const clienteGuardado = obtenerClienteGuardado();
     const nombreClienteInput = document.getElementById("nombre-cliente");
     const medioPagoSelect = document.getElementById("medio-pago");
-    const nombreCliente = nombreClienteInput ? nombreClienteInput.value.trim() : "";
+    const nombreCliente = nombreClienteInput ? nombreClienteInput.value.trim() || clienteGuardado : clienteGuardado;
     const medioPago = medioPagoSelect ? medioPagoSelect.value : "";
 
     if (!Array.isArray(carrito) || carrito.length === 0) {
@@ -145,6 +156,10 @@ window.confirmarCompra = async () => {
     if (!nombreCliente) {
         alert("Debes ingresar el nombre del cliente");
         return;
+    }
+
+    if (nombreCliente) {
+        sessionStorage.setItem("cliente", nombreCliente);
     }
 
     try {

@@ -13,8 +13,9 @@
         <nav class="nav">
             <div class="contenedor">
                 <div class="contenedor-logo">                    
-                    <img src="/favicon2.jpg" alt="logoEmpresa">
-                       
+                    <button onclick="volverAInicio()">
+                        <img src="/favicon2.jpg" alt="logoEmpresa">
+                    </button> 
                     <div class="texto-logo">
                         <span class="titulo-app">Protectium App</span>
                         <span class="subtitulo-app">Licencias originales, seguridad garantizada</span>
@@ -52,8 +53,11 @@
                         name="nombre"
                         class="form-control"
                         value="<%= producto ? producto.nombre : '' %>"
+                        minlength="3"
+                        maxlength="100"
                         required>
                 </div>
+                
                 <!-- DESCRIPCION -->
                 <div class="mb-3">
                     <label class="form-label">Descripción</label>
@@ -61,6 +65,8 @@
                         name="descripcion"
                         class="form-control"
                         rows="4"
+                        minlength="10"
+                        maxlength="500"
                         required><%= producto ? producto.descripcion : '' %></textarea>
                 </div>
                 <!-- PRECIO -->
@@ -70,6 +76,7 @@
                         name="precio"
                         class="form-control"
                         value="<%= producto ? producto.precio : '' %>"
+                        min="0"
                         required>
                 </div>
                 <!-- STOCK -->
@@ -79,6 +86,8 @@
                         name="stock"
                         class="form-control"
                         value="<%= producto ? producto.stock : '' %>"
+                        min="0"
+                        step="1"
                         required>
                 </div>
                 <!-- IMAGEN -->
@@ -89,6 +98,16 @@
                         class="form-control"
                         value="<%= producto ? producto.imagen : '' %>">
                 </div>
+                <div id="avisoError" class=" alert alert-dangertext-center">
+                    
+                </div>
+                <% if (errores && errores.length) { %>
+                    <% errores.forEach(error => { %>
+                        <div class="alert alert-danger">
+                            <%= error %>
+                        </div>
+                    <% }) %>
+                <% } %>
                 
                 <!-- BOTONES -->
                 <div class="d-flex gap-2 mb-3">

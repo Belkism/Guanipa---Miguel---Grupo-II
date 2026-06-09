@@ -10,6 +10,8 @@ router.get("/dashboard", adminController.mostrarDashboard);
 router.get("/productos/crear", productoController.formCrear);
 router.get("/productos/editar/:id", productoController.formEditar);
 
+router.post("/productos/editar/:id", productoController.editar);
+
 
 
 module.exports = router;

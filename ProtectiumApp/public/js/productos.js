@@ -173,7 +173,7 @@ window.quitarDelCarrito = function(idProducto, categoria) {
 
 window.volverAInicio = () => {
     sessionStorage.clear();
-    window.location.href = "index.html";
+    window.location.href = "/";
 }
 
 // 6. Listener de arranque DOMContentLoaded (Tu lógica de inicio preservada)

@@ -1,6 +1,11 @@
 
 const obtenerCarrito = () => {
-    return JSON.parse(sessionStorage.getItem("carrito")) || [];
+    try {
+        const carrito = JSON.parse(sessionStorage.getItem("carrito"));
+        return Array.isArray(carrito) ? carrito : [];
+    } catch {
+        return [];
+    }
 };
 
 
@@ -181,6 +186,10 @@ window.confirmarCompra = async () => {
 
         const data = await respuesta.json();
 
+        if (!data.idticket) {
+            throw new Error("El servidor no devolvió un ticket válido");
+        }
+
         alert("Compra realizada con éxito");
         sessionStorage.removeItem("carrito");
 
@@ -207,12 +216,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         const id = Number(e.target.dataset.id);
         const cantidad = Number(e.target.value);
 
+
         let carrito = obtenerCarrito();
 
         const producto = carrito.find(p => p.id === id);
 
         if (producto) {
-            producto.cantidad = cantidad;
+            producto.cantidad = Math.max(1, cantidad);
         }
 
         guardarCarrito(carrito);

@@ -5,10 +5,7 @@ const adminController = {
         const listaProductos = await productos.findAll({
         raw: true
         });
-
-        console.log(listaProductos);
         
-
         res.render("dashboard", {
             productos: listaProductos
         });

@@ -95,3 +95,9 @@ nav {
 h1, p, h2, label{
     color: whitesmoke;
 }
+
+
+#avisoError {
+    color: rgb(218, 60, 60);
+    
+}

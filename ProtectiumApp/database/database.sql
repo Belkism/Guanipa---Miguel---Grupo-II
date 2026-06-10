@@ -136,3 +136,17 @@ INSERT INTO productos (nombre, descripcion, imagen, precio, stock, activo, categ
 ('Office 2021 Hogar y Empresas Mac','Licencia para Office Hogar y Empresas Mac 2021 Funciona exclusivamente en Mac Descargue el software desde el sitio web oficial Clave de licencia de 25 dígitos Incluye Word, Excel, PowerPoint, Outlook Todos nuestros productos son originales y cuentan con garantía y soporte técnico Entrega inmediata directo a tu correo electrónico junto con manual de instalación.',"/images/productos/OfficeHogarYEmpresa.png",156800,8,1,2,NOW(),NOW());
 
 
+-- =========================
+-- INSERTO USUARIO ADMINISTRADOR
+-- =========================
+INSERT INTO usuarios
+(nombre, correo, contrasena, telefono, rol, activo)
+VALUES
+(
+    "Patricio Rey",
+    "patricio@test.com",
+    '$2b$10$r/sS6Y/CjOY7MThOANX25eOnddMpxZQs0WXEsnQgQck7bNxTCRLlu',
+    "0303456",
+    'administrador',
+    1
+);

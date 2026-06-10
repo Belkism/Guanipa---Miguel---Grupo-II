@@ -1,5 +1,6 @@
 // Configuración inicial
 require("dotenv").config();
+const crearAdminPorDefecto = require("./config/crearAdminPorDefecto.js");
 
 const express = require("express");
 const cors = require("cors");
@@ -42,13 +43,14 @@ app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
 
 
-
 // Inicio del servidor
 const startServer = async () => {
     try {
         
         await syncDB();
-        
+
+        await crearAdminPorDefecto();
+       
         server = app.listen(PORT, () => {
             console.log(`Servidor corriendo en http://localhost:${PORT}`)
         })

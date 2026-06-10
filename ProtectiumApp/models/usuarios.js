@@ -13,8 +13,7 @@ const usuarios = db.define("usuarios", {
 
     nombre: {type: DataTypes.STRING(200),allowNull: false,},
 
-
-    correo: {type: DataTypes.STRING(200),allowNull: false,},
+    correo: {type: DataTypes.STRING(200),allowNull: false, unique: true},
 
     contrasena: {type: DataTypes.STRING(200),allowNull: false,},
 

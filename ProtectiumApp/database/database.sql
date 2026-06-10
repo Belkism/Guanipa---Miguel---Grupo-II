@@ -49,7 +49,7 @@ CREATE TABLE usuarios (
     id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(200) NOT NULL,
     correo VARCHAR(200) NOT NULL,
-    contrasena VARCHAR(200) NOT NULL,
+    contrasena VARCHAR(200) NOT NULL UNIQUE,
     telefono VARCHAR(200) NULL,
     rol VARCHAR(255) NOT NULL,
     activo TINYINT(1) NOT NULL,
@@ -136,15 +136,3 @@ INSERT INTO productos (nombre, descripcion, imagen, precio, stock, activo, categ
 ('Office 2021 Hogar y Empresas Mac','Licencia para Office Hogar y Empresas Mac 2021 Funciona exclusivamente en Mac Descargue el software desde el sitio web oficial Clave de licencia de 25 dígitos Incluye Word, Excel, PowerPoint, Outlook Todos nuestros productos son originales y cuentan con garantía y soporte técnico Entrega inmediata directo a tu correo electrónico junto con manual de instalación.',"/images/productos/OfficeHogarYEmpresa.png",156800,8,1,2,NOW(),NOW());
 
 
--- =========================
--- INSERTO USUARIO PRUEBA
--- =========================
-INSERT INTO usuarios (id, nombre, correo, contrasena, telefono, rol, activo) VALUES (
-    1,
-    'Juan',
-    'admin@test.com',
-    '123456',
-    '3456123',
-    'admin',
-    0
-);

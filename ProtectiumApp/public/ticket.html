@@ -19,6 +19,7 @@
     <p>Fecha: <span id="fechaCompra">-</span></p>
     <p>Nombre del cliente: <span id="cliente">-</span></p>
     <p>Medio de pago: <span id="medioPago">-</span></p>
+    <p><strong>Total de la compra: $ <span id="totalCompra">0</span></strong></p>
 
     <table>
     <thead>
@@ -26,13 +27,14 @@
         <th>Producto</th>
         <th>Cantidad</th>
         <th>Precio</th>
+        <th>Subtotal</th>
         </tr>
     </thead>
     <tbody id="tablaProductos"></tbody>
     </table>
 
     <div class="actions">
-    <a id="descargarLink" class="hidden" target="_blank">Descargar Ticket</a>
+    <a id="descargarLink" class="hidden" download>Descargar Ticket</a>
     </div>
 
     <script>
@@ -58,19 +60,30 @@
         document.getElementById("fechaCompra").textContent = formatoFecha(ticket.fechaCompra);
         document.getElementById("cliente").textContent = ticket.cliente || "No disponible";
         document.getElementById("medioPago").textContent = ticket.medioPago || "No disponible";
+        let totalRender = Number(ticket.totalCompra) || 0;
 
         const tbody = document.getElementById("tablaProductos");
         tbody.innerHTML = "";
 
         (ticket.productos || []).forEach((producto) => {
             const tr = document.createElement("tr");
+          const precio = Number(producto.precio) || 0;
+          const cantidad = Number(producto.cantidad) || 0;
+          const total = Number(producto.total) || (precio * cantidad);
+            totalRender += total;
             tr.innerHTML = `
             <td>${producto.nombre}</td>
-            <td>${producto.cantidad}</td>
-            <td>${producto.precio}</td>
+          <td>${cantidad}</td>
+          <td>${precio}</td>
+          <td>${total}</td>
             `;
             tbody.appendChild(tr);
         });
+
+        if ((Number(ticket.totalCompra) || 0) > 0) {
+            totalRender = Number(ticket.totalCompra);
+        }
+        document.getElementById("totalCompra").textContent = totalRender;
 
         const link = document.getElementById("descargarLink");
         link.href = `/ticket/pdf?ids=${ticket.idticket}`;

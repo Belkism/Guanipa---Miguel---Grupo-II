@@ -1,5 +1,7 @@
 const db = require("../models/index.js");
 const path = require("path");
+const puppeteer = require("puppeteer");
+
 
 const resolverVentaId = async (idsQuery) => {
     if (idsQuery) {
@@ -35,19 +37,29 @@ const construirTicket = async (ventaId) => {
         }],
     });
 
+    const productos = detalles.map((detalle) => {
+        const producto = detalle.producto || detalle.productos;
+        return {
+            id: producto ? producto.id : detalle.producto_id,
+            nombre: producto ? producto.nombre : "Producto",
+            precio: producto ? producto.precio : 0,
+            cantidad: detalle.cantidad,
+        };
+    });
+
+    const totalVenta = Number(venta.total);
+    const totalCalculado = productos.reduce((acum, item) => {
+        const precio = Number(item.precio) || 0;
+        const cantidad = Number(item.cantidad) || 0;
+        return acum + (precio * cantidad);
+    }, 0);
+
     return {
         idticket: venta.id,
         fechaCompra: venta.fecha,
         cliente: venta.nombre_cliente,
-        productos: detalles.map((detalle) => {
-            const producto = detalle.producto || detalle.productos;
-            return {
-                id: producto ? producto.id : detalle.producto_id,
-                nombre: producto ? producto.nombre : "Producto",
-                precio: producto ? producto.precio : 0,
-                cantidad: detalle.cantidad,
-            };
-        }),
+        totalCompra: totalVenta > 0 ? totalVenta : totalCalculado,
+        productos,
         medioPago: venta.medio,
         esVista: true,
     };
@@ -144,6 +156,8 @@ const ticketController = {
     },
 
     descargarticket: async (req, res) => {
+        let browser;
+
         try {
             const ventaId = await resolverVentaId(req.query.ids);
 
@@ -151,10 +165,42 @@ const ticketController = {
                 return res.status(404).send("No hay ventas para mostrar ticket");
             }
 
-            return res.redirect(`/ticket?ids=${ventaId}`);
+            const protocolo = req.get("x-forwarded-proto") || req.protocol;
+            const host = req.get("host");
+            const ticketUrl = `${protocolo}://${host}/ticket?ids=${ventaId}`;
+
+            browser = await puppeteer.launch({
+                headless: true,
+                args: ["--no-sandbox", "--disable-setuid-sandbox"],
+            });
+
+            const page = await browser.newPage();
+            await page.goto(ticketUrl, { waitUntil: "networkidle0", timeout: 45000 });
+
+            // Evita que el enlace de descarga se renderice dentro del PDF.
+            await page.addStyleTag({ content: ".actions { display: none !important; }" });
+
+            const pdfBuffer = await page.pdf({
+                format: "A4",
+                printBackground: true,
+                margin: {
+                    top: "20px",
+                    right: "20px",
+                    bottom: "20px",
+                    left: "20px",
+                },
+            });
+
+            res.setHeader("Content-Type", "application/pdf");
+            res.setHeader("Content-Disposition", `attachment; filename=ticket-${ventaId}.pdf`);
+            return res.send(pdfBuffer);
         } catch (error) {
             console.error("Error al descargar el ticket:", error);
-            res.status(500).send("Error interno del servidor");
+            return res.status(500).send("Error interno del servidor");
+        } finally {
+            if (browser) {
+                await browser.close();
+            }
         }
     },
 };

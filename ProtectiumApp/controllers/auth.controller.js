@@ -9,7 +9,7 @@ const authController = {
     login : async (req, res) => {
         try{
             const {correo, contrasena} = req.body;
-
+            
             const usuario = await usuarios.findOne({
                 where: { correo }
             });
@@ -20,7 +20,10 @@ const authController = {
                 });
             }
 
-            const coincide = await bcrypt.compare(contrasena, usuario.contrasena);
+            const coincide = await bcrypt.compare(
+                contrasena,
+                usuario.contrasena
+            );
 
             if (!coincide) {
                 return res.render("login", {
@@ -43,17 +46,12 @@ const authController = {
     
     registrar: async (req, res) => {
         try {
-            const {nombre, correo, contrasena, telefono, rol} = req.body;
-
-            if (!nombre || !correo || !contrasena || !telefono || !rol) {
-                return res.status(400).json({
-                    mensaje: "Faltan datos obligatorios"
-                });
-            }
-
+            
             // Verificar si ya existe
             const usuarioExistente = await usuarios.findOne({
-                where: { correo }
+                where: {
+                    correo: req.usuarioNormalizado.correo
+                }
             });
 
             if (usuarioExistente) {
@@ -64,15 +62,14 @@ const authController = {
 
             const saltRound = 10;
 
-            const hash = await bcrypt.hash(contrasena, saltRound);
-
+            const hash = await bcrypt.hash(
+                req.usuarioNormalizado.contrasena, 
+                saltRound
+            );
 
             const usuario = await usuarios.create({
-                nombre,
-                correo,
+                ...req.usuarioNormalizado,
                 contrasena: hash,
-                telefono,
-                rol,
                 activo: true
             });
 

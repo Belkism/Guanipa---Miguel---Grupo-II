@@ -23,7 +23,7 @@ CREATE TABLE categorias (
 -- =========================
 CREATE TABLE productos (
     id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(255) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
     descripcion TEXT NULL,
     imagen VARCHAR(255) NOT NULL,
     precio FLOAT NOT NULL,
@@ -48,8 +48,8 @@ CREATE TABLE productos (
 CREATE TABLE usuarios (
     id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(200) NOT NULL,
-    correo VARCHAR(200) NOT NULL,
-    contrasena VARCHAR(200) NOT NULL UNIQUE,
+    correo VARCHAR(200) NOT NULL UNIQUE,
+    contrasena VARCHAR(200) NOT NULL,
     telefono VARCHAR(200) NULL,
     rol VARCHAR(255) NOT NULL,
     activo TINYINT(1) NOT NULL,

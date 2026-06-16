@@ -1,10 +1,10 @@
-const db = require("../database/db.js")
+const db = require("../database/db.js");
 
-const usuarios = require("./usuarios.js")
-const productos = require("./productos.js")
-const categorias = require("./categorias.js")
-const ventas = require("./ventas.js")
-const detalleVentas = require("./detalleVentas.js")
+const usuarios = require("./usuarios.js");
+const productos = require("./productos.js");
+const categorias = require("./categorias.js");
+const ventas = require("./ventas.js");
+const detalleVentas = require("./detalleVentas.js");
 
 /* ======================
    RELACIONES
@@ -13,41 +13,41 @@ const detalleVentas = require("./detalleVentas.js")
 /* CATEGORIAS -> PRODUCTOS (1:N) */
 categorias.hasMany(productos, {
     foreignKey: "categoria_id"
-})
+});
 
 productos.belongsTo(categorias, {
     foreignKey: "categoria_id"
-})
+});
 
 
 /* USUARIOS -> VENTAS (1:N) */
 usuarios.hasMany(ventas, {
     foreignKey: "usuario_id"
-})
+});
 
 ventas.belongsTo(usuarios, {
     foreignKey: "usuario_id"
-})
+});
 
 
 /* VENTAS -> DETALLE_VENTAS (1:N) */
 ventas.hasMany(detalleVentas, {
     foreignKey: "venta_id"
-})
+});
 
 detalleVentas.belongsTo(ventas, {
     foreignKey: "venta_id"
-})
+});
 
 
 /* PRODUCTOS -> DETALLE_VENTAS (1:N) */
 productos.hasMany(detalleVentas, {
     foreignKey: "producto_id"
-})
+});
 
 detalleVentas.belongsTo(productos, {
     foreignKey: "producto_id"
-})
+});
 
 /* =========================
    SINCRONIZACIÓN BD
@@ -55,17 +55,16 @@ detalleVentas.belongsTo(productos, {
 
 const syncDB = async () => {
     try {
-        await db.authenticate()
-        console.log("Conexión exitosa")
+        await db.authenticate();
+        console.log("Conexión exitosa");
 
-        await db.sync({
-            alter: true
-        })
+        await db.sync();
 
-        console.log("Base de datos sincronizada")
+        console.log("Base de datos sincronizada");
+
     } catch (error) {
-        console.log("Error al sincronizar:", error)
-        throw error
+        console.log("Error al sincronizar:", error);
+        throw error;
     }
 }
 
@@ -76,4 +75,4 @@ module.exports = {
     categorias,
     ventas,
     detalleVentas
-}
+};

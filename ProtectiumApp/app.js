@@ -47,7 +47,7 @@ const startServer = async () => {
     try {
         
         await syncDB();
-      
+         
         server = app.listen(PORT, () => {
             console.log(`Servidor corriendo en http://localhost:${PORT}`)
         })

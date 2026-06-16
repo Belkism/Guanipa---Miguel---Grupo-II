@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("input", () => {
         aviso.innerText = "";
+        aviso.classList.add("d-none");
     });
 
     form.addEventListener("submit", (e) => {
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (error) {
             e.preventDefault();
             aviso.innerText = error;
+             aviso.classList.remove("d-none");
         }
     });
 

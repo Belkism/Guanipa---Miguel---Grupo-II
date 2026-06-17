@@ -3,6 +3,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser"); 
 const path = require("path");
 
 // Base de datos
@@ -29,7 +30,8 @@ let shuttingDown = false
 // Middlewares
 app.use(cors());
 app.use(express.json());
-// servir archivos estáticos desde ruta absoluta dinamica
+app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 

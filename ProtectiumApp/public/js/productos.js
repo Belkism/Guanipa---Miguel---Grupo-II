@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Validar sesión del cliente
     const nombre = sessionStorage.getItem("cliente");
     if (!nombre) {
-        window.location.href = "index.html";
+        window.location.href = "/";
         return; // Detiene la ejecución si no está logueado
     }
 

@@ -1,5 +1,6 @@
 const usuarios = require("../models/usuarios");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const authController = {
     mostrarLogin : (req, res) => {
@@ -31,7 +32,19 @@ const authController = {
                 });
             }
 
-            //Si usaramos sesiones, se guardaria aca el ususario
+            const token = crearToken(usuario);
+
+            res.cookie(
+                "token",
+                token,
+                {
+                    httpOnly: true,
+                    secure: false,
+                    sameSite: "strict",
+                    maxAge : 10*60*1000
+                }
+            );
+
 
             return res.redirect("/admin/dashboard");
 
@@ -86,8 +99,41 @@ const authController = {
                 mensaje: "Ocurrió un error al procesar la solicitud"
             });
         }
+    },
+
+    logout : (req, res) => {
+        
+        res.clearCookie(
+            "token",
+            {
+                httpOnly: true,
+                secure: false,
+                sameSite: "strict",
+                maxAge : 10*60*1000
+            }
+            
+        );
+
+        res.redirect("/");
     }
 };
+
+
+const crearToken = (datos) => {
+    const token = jwt.sign(
+        {
+            id: datos.id,
+            rol: datos.rol
+        },
+        process.env.JWT_SECRET,
+        {
+            expiresIn: '10m',
+            algorithm: 'HS256'
+        }
+    );
+
+    return token;
+}
 
 
 module.exports = authController;

@@ -171,7 +171,7 @@ const ticketController = {
 
             browser = await puppeteer.launch({
                 headless: true,
-                args: ["--no-sandbox", "--disable-setuid-sandbox"],
+                //args: ["--no-sandbox", "--disable-setuid-sandbox"],
             });
 
             const page = await browser.newPage();

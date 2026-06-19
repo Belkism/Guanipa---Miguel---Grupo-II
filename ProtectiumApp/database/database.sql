@@ -145,7 +145,7 @@ VALUES
 (
     "Patricio Rey",
     "patricio@test.com",
-    '$2b$10$r/sS6Y/CjOY7MThOANX25eOnddMpxZQs0WXEsnQgQck7bNxTCRLlu',
+    '$2b$10$tII9vvH4OPmM2mpqFkz/WOCtXHPKkJXcgk/1fp7yXBpuQ7UM1BwHq',
     "0303456",
     'administrador',
     1

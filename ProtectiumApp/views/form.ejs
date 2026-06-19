@@ -45,7 +45,7 @@
             <h2 class="mb-4 text-center">
                 <%= producto ? "Editar producto" : "Crear producto" %>
             </h2>
-            <form id="form" action="<%= producto ? '/admin/productos/editar/' + producto.id : '/admin/productos/crear' %>" method="POST">
+            <form id="form" action="<%= producto ? '/admin/productos/editar/' + producto.id : '/admin/productos/crear' %>" method="POST" enctype="multipart/form-data">
                 <!-- NOMBRE -->
                 <div class="mb-3">
                     <label class="form-label">Nombre</label>
@@ -92,11 +92,15 @@
                 </div>
                 <!-- IMAGEN -->
                 <div class="mb-3">
-                    <label class="form-label">Imagen (URL)</label>
-                    <input type="text"
+                    <label class="form-label">Imagen</label>
+                    <input type="file"
                         name="imagen"
                         class="form-control"
-                        value="<%= producto ? producto.imagen : '' %>">
+                        accept=".jpg,.jpeg,.png,.webp">
+                    <% if (producto && producto.imagen) { %>
+                        <input type="hidden" name="imagenActual" value="<%= producto.imagen %>">
+                        <small class="text-muted d-block mt-2">Si no eliges un archivo nuevo, se mantiene la imagen actual.</small>
+                    <% } %>
                 </div>
                 <!-- CATEGORIA -->
                 <% if (!producto) { %>

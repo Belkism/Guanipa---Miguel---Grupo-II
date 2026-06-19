@@ -6,7 +6,9 @@ function validarProducto(req, res, next) {
         descripcion: req.body.descripcion?.trim() || "",
         precio: Number(req.body.precio),
         stock: Number(req.body.stock),
-        imagen: req.body.imagen?.trim() || "",
+        imagen: req.file
+            ? `/images/productos/${req.file.filename}`
+            : req.body.imagenActual?.trim() || "",
         categoria_id: Number(req.body.categoria_id)
     };
 
@@ -57,7 +59,8 @@ function validarProducto(req, res, next) {
         return res.status(400).render("form", {
             producto: {
                 id: req.params.id,
-                ...req.body
+                ...req.body,
+                imagen: req.body.imagenActual?.trim() || ""
             },
             errores
         });

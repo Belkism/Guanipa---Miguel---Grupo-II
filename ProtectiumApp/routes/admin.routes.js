@@ -20,6 +20,10 @@ router.get("/productos/editar/:id", productoController.formEditar);
 
 router.post("/productos/editar/:id", subirImagenProducto, validarProducto, productoController.editar);
 
+router.post("/productos/eliminar/:id", productoController.eliminar);
+
+router.post("/productos/reactivar/:id", productoController.reactivar);
+
 router.post("/productos/crear", subirImagenProducto, validarProducto, productoController.crear);
 
 

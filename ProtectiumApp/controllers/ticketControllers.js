@@ -89,7 +89,6 @@ const ticketController = {
                 nombre_cliente: nombreCliente,
                 total,
                 fecha: new Date(),
-                usuario_id: null,
                 medio: medioPago,
             }, { transaction });
 

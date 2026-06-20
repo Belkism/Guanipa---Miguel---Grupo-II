@@ -4,6 +4,7 @@ const router = express.Router();
 
 const adminController = require("../controllers/admin.controllers.js");
 const productoController = require("../controllers/productos.controllers.js");
+const ventasController = require("../controllers/ventas.controllers.js");
 
 
 const validarProducto = require("../middlewares/validarProducto.js");
@@ -13,6 +14,8 @@ const verificarJwt = require("../middlewares/verificarJWT.js");
 router.use(verificarJwt);
 
 router.get("/dashboard", adminController.mostrarDashboard);
+
+router.get("/ventas", ventasController.listar);
 
 router.get("/productos/crear",productoController.formCrear);
 

@@ -20,16 +20,6 @@ productos.belongsTo(categorias, {
 });
 
 
-/* USUARIOS -> VENTAS (1:N) */
-usuarios.hasMany(ventas, {
-    foreignKey: "usuario_id"
-});
-
-ventas.belongsTo(usuarios, {
-    foreignKey: "usuario_id"
-});
-
-
 /* VENTAS -> DETALLE_VENTAS (1:N) */
 ventas.hasMany(detalleVentas, {
     foreignKey: "venta_id"

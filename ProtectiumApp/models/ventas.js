@@ -15,11 +15,6 @@ const ventas = db.define("ventas", {
 
     fecha: {type: DataTypes.DATE,allowNull: false},
 
-    usuario_id: {
-        type: DataTypes.BIGINT.UNSIGNED,
-        allowNull: true,
-    },
-
     medio:{
         type: DataTypes.STRING(50),
         allowNull: false,

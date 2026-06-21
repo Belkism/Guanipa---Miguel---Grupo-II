@@ -3,6 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnLoginAdmin = document.getElementById("btnLoginAdmin");
     const inputNombre = document.getElementById("nombre");
     const aviso = document.getElementById("aviso");
+    const temaGuardado = localStorage.getItem("tema");
+
+    if(temaGuardado==="dark"){
+        document.body.classList.add("dark");
+    }
 
     btnContinuar.addEventListener("click", () => {
         const nombre = inputNombre.value.trim();

@@ -5,7 +5,7 @@ const verificarJWT = (req, res, next) => {
     const token = req.cookies.token;
 
     if (!token) {
-        return res.redirect("/auth/login");
+        return res.redirect("/auth/login?session=expirada");
     }
 
     try {
@@ -29,7 +29,7 @@ const verificarJWT = (req, res, next) => {
                 },
                 process.env.JWT_SECRET,
                 {
-                    expiresIn: '10m',
+                    expiresIn: '1m',
                     algorithm: 'HS256'
                 }
             );
@@ -38,13 +38,16 @@ const verificarJWT = (req, res, next) => {
                 httpOnly: true,
                 secure: false,
                 sameSite: "strict",
-                maxAge: 10 * 60 * 1000
+                maxAge: 60 * 1000
             });
         }
 
         next();
 
     } catch (error){
+        if (error.name === "TokenExpiredError") {
+            return res.redirect("/auth/login?session=expirada");
+        }
         return res.redirect("/auth/login");
     }
     

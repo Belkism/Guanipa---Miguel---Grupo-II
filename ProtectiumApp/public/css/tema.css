@@ -1,0 +1,82 @@
+:root{
+    --bg-body:#264768;
+    --bg-navbar:whitesmoke;
+    --bg-card:whitesmoke;
+    --bg-submenu:whitesmoke;
+
+    --text-primary:#264768;
+    --text-secondary:#5a5a5a;
+    --text-light:whitesmoke;
+
+    --bg-pagination: whitesmoke;
+    --text-pagination: #264768;
+    --bg-pagination-active: #264768;
+    --text-pagination-active: whitesmoke;
+
+    --hover-color:#6a93bb;
+
+    --shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+
+/* Tema oscuro */
+body.dark{
+
+    --bg-body:#0f1720;
+    --bg-navbar:#1a2330;
+
+    --bg-card:#303b47;
+    --bg-submenu:#303b47;
+
+    /* Verde del logo */
+    --text-primary:#50DC9F;
+
+    /* Misma familia pero más suave */
+    --text-secondary:#3FB987;
+    
+    --bg-pagination: #1a2330;
+    --text-pagination: #74E6B5;
+    --bg-pagination-active: #303b47;
+    --text-pagination-active: #50DC9F;
+
+    /* Títulos */
+    --text-light:#74E6B5;
+
+    --hover-color:#69E9B3;
+
+    --shadow:0 5px 15px rgba(0,0,0,.35);
+
+}
+
+
+.tema-btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    background:transparent;
+    border:none;
+
+    color:var(--text-primary);
+
+    cursor:pointer;
+
+    font-size:1rem;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight:bold;
+
+    transition:color .3s ease;
+}
+
+.tema-btn:hover{
+    color:var(--hover-color);
+}
+
+#temaIcon{
+    display:flex;
+    align-items:center;
+}
+
+.page-form {
+    --text-primary: whitesmoke;
+}

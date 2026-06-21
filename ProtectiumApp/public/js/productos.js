@@ -86,12 +86,12 @@ function renderizarSeccion(categoria) {
 
         grid.innerHTML += `
         <div class="col-12 col-md-6 col-lg-4">
-            <div class="card card-producto h-100 shadow-sm text-dark bg-white">
+            <div class="card card-producto h-100 shadow-sm">
                 <img src="${producto.imagen}" class="card-img-top imagen-producto p-3" alt="Imagen de ${producto.nombre}" style="max-height: 180px; object-fit: contain;">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title fs-6 fw-bold">${producto.nombre}</h5>
-                    <p class="card-text text-muted small descripcion-producto">${producto.descripcion}</p>
-                    <h4 class="precio-producto text-primary mt-auto mb-3">$ ${producto.precio}</h4>
+                    <p class="card-text small descripcion-producto">${producto.descripcion}</p>
+                    <h4 class="precio-producto mt-auto mb-3">$ ${producto.precio}</h4>
                     
                     <div class="mt-2">
                         ${existeEnCarrito ? 
@@ -116,7 +116,7 @@ function renderizarBotoneraSeccion(categoria, totalItems, contenedorPag) {
 
     if (totalPaginas <= 1) return;
 
-    let navHTML = `<nav><ul class="pagination pagination-sm justify-content-center">`;
+    let navHTML = `<nav><ul class="pagination pagination-sm justify-content-center mt-5">`;
 
     // Anterior
     navHTML += `
@@ -136,7 +136,7 @@ function renderizarBotoneraSeccion(categoria, totalItems, contenedorPag) {
 
     // Siguiente
     navHTML += `
-        <li class="page-item ${config.paginaActual === totalPaginas ? 'disabled' : ''}">
+        <li class="page-item ${config.paginaActual === totalPaginas ? 'disabled' : ''} ">
             <button class="page-link" onclick="cambiarPaginaSeccion('${categoria}', ${config.paginaActual + 1})">Siguiente</button>
         </li>
     `;

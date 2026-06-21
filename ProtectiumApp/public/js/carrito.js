@@ -34,7 +34,7 @@ const renderizarCarrito = (productos) => {
         let html = "";
         productos.forEach(producto => {
             html += `
-            <div class="card mb-3 shadow-sm mx-auto" style="max-width: 900px;">
+            <div class="card card-carrito mb-3 shadow-sm mx-auto" style="max-width: 900px;">
                 <div class="row g-0 align-items-center">
                     <div class="col-md-2 text-center p-2">
                         <img src="${producto.imagen}"
@@ -44,7 +44,7 @@ const renderizarCarrito = (productos) => {
                     <div class="col-md-5">
                         <div class="card-body">
                             <h5 class="card-title">${producto.nombre}</h5>
-                            <p class="fw-bold text-success mb-0">
+                            <p class="fw-bold mb-0">
                                 $ ${producto.precio}
                             </p>
                         </div>
@@ -60,7 +60,7 @@ const renderizarCarrito = (productos) => {
                     <!-- Subtotal y eliminar -->
                     <div class="col-md-2 text-center">
                         <label class="form-label">Subtotal</label>
-                        <p class="fw-bold">
+                        <p class="subtotal fw-bold">
                             $ ${producto.cantidad * producto.precio}
                         </p>
                     </div>
@@ -78,12 +78,15 @@ const renderizarCarrito = (productos) => {
         renderizarTotal(productos);
 
     } else {
+        console.log("carrito vacio");
+        
         contenedor.innerHTML = `
-        <div class="w-100 text-center mt-5">
+        <div class="carrito-vacio w-100 text-center mt-5">
             <h3>No hay productos en el carrito</h3>
-            <p class="text-muted">Agregá productos para comenzar tu compra.</p>
+            <p >Agregá productos para comenzar tu compra.</p>
         </div>
         `;
+        renderizarTotal([]);
     }
 
 }
@@ -95,25 +98,31 @@ const calcularTotal = (carrito) =>{
 }
 
 const renderizarTotal = (carrito) => {
-    const total = calcularTotal(carrito);
     const contenedorTotal = document.querySelector("#total-carrito");
-
-    contenedorTotal.innerHTML = `
-        <div class="card shadow-sm mx-auto mt-4" style="max-width: 900px;">
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h4 class="mb-0">
-                        Total: <span class="text-success">$ ${total}</span>
-                    </h4>
-                    <button
-                        class="btn btn-success btn-lg"
-                        onclick="abrirModal()">
-                        Confirmar compra
-                    </button>
+    
+    if (carrito.length !== 0) {
+        const total = calcularTotal(carrito);
+        
+        contenedorTotal.innerHTML = `
+            <div class="card card-total shadow-sm mx-auto mt-4" style="max-width: 900px;">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">
+                            Total: <span class="total-precio">$ ${total}</span>
+                        </h4>
+                        <button
+                            class="btn btn-success btn-lg"
+                            onclick="abrirModal()">
+                            Confirmar compra
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    `;
+        `;
+    } else {
+        contenedorTotal.innerHTML = "";
+    }
+    
 };
 
 

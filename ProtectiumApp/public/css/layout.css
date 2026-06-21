@@ -1,0 +1,118 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background-color:var(--bg-body);
+}
+
+
+/* ===== NAVBAR ===== */
+
+nav{
+    width:100%;
+}
+
+.contenedor{
+    width:100%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 30px;
+
+    background-color:var(--bg-navbar);
+}
+
+
+/* ===== LOGO ===== */
+
+.contenedor-logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.contenedor img{
+    width:60px;
+    display:block;
+}
+
+.contenedor button,
+#btnLogo{
+    background:transparent;
+    border:none;
+    padding:0;
+    cursor:pointer;
+}
+
+.texto-logo{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.titulo-app{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size:1.8rem;
+    font-weight:bold;
+
+    color:var(--text-primary);
+
+    line-height:1.1;
+}
+
+.subtitulo-app{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size:.85rem;
+
+    color:var(--text-secondary);
+
+    line-height:1.1;
+}
+
+
+/* ===== MENÚ ===== */
+
+.menu{
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    list-style:none;
+}
+
+.menu a,
+.menu button{
+
+    background:transparent;
+    border:none;
+    padding:0;
+
+    text-decoration:none;
+
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size:1rem;
+    font-weight:bold;
+
+    color:var(--text-primary);
+
+    cursor:pointer;
+
+    transition:color .3s ease;
+}
+
+.menu a:hover,
+.menu button:hover{
+    color:var(--hover-color);
+}
+
+
+/* ===== UTILIDADES ===== */
+
+.oculto{
+    display:none;
+}

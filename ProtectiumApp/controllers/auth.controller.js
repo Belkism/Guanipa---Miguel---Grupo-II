@@ -41,7 +41,7 @@ const authController = {
                     httpOnly: true,
                     secure: false,
                     sameSite: "strict",
-                    maxAge : 10*60*1000
+                    maxAge : 60*1000
                 }
             );
 
@@ -109,7 +109,7 @@ const authController = {
                 httpOnly: true,
                 secure: false,
                 sameSite: "strict",
-                maxAge : 10*60*1000
+                maxAge : 60*1000
             }
             
         );
@@ -127,7 +127,7 @@ const crearToken = (datos) => {
         },
         process.env.JWT_SECRET,
         {
-            expiresIn: '10m',
+            expiresIn: '1m',
             algorithm: 'HS256'
         }
     );

@@ -1,6 +1,7 @@
 body {
     margin: 0;
-    background-color: #264768;
+    background-color: var(--bg-body);
+    color: var(--text-light);
 }
 
 nav {
@@ -12,7 +13,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: whitesmoke;
+    background-color: var(--bg-navbar);
     padding: 20px 30px;
 }
 
@@ -47,14 +48,14 @@ nav {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1.8rem;
     font-weight: bold;
-    color: #264768;
+    color: var(--text-primary);
     line-height: 1.1;
 }
 
 .subtitulo-app {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 0.85rem;
-    color: #5a5a5a;
+    color: var(--text-secondary);
     line-height: 1.1;
 }
 
@@ -83,13 +84,13 @@ nav {
     font-size: 1rem;
     font-weight: bold;
 
-    color: #264768;
+    color: var(--text-primary);
     text-decoration: none;
     cursor: pointer;
 }
 
 .menu a:hover {
-    color: #6a93bb;
+    color: var(--hover-color);
 }
 
 
@@ -98,9 +99,10 @@ nav {
 /*======= Galeria Productos =============*/
 
 
-h1, p, h2{
-    color: whitesmoke;
+.container {
+    background-color: transparent !important;
 }
+
 
 .container img {
     height: 100px;
@@ -113,7 +115,20 @@ h1, p, h2{
     height: 100%;
     width: 80%;
     margin: 10px auto;
-    background-color:  whitesmoke;
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+
+    box-shadow: var(--shadow);
+}
+.card {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    box-shadow: var(--shadow);
+    border: none;
+}
+
+.card small {
+    color: var(--text-primary) !important;
 }
 
 .descripcion-producto {
@@ -123,6 +138,7 @@ h1, p, h2{
 
 .precio-producto {
     text-align: center;
+    color: var(--text-primary);
 }
 
 .btn-carrito {
@@ -131,4 +147,37 @@ h1, p, h2{
 
 .oculto {
     display: none;
+}
+
+.btnEditar {
+    background-color: var(--text-secondary);
+    color: whitesmoke;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btnEditar:hover {
+    background-color: var(--hover-color);
+    color: white;
+}
+
+.btnEliminar {
+    background-color: #c0392b;
+    color: whitesmoke;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btnEliminar:hover {
+    background-color: #e74c3c;
 }

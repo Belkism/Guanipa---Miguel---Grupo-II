@@ -1,6 +1,7 @@
 body {
     margin: 0;
-    background-color: #264768;
+    background-color: var(--bg-body);
+    color: var(--text-light);
 }
 
 nav {
@@ -12,7 +13,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: whitesmoke;
+    background-color: var(--bg-navbar);
     padding: 20px 30px;
 }
 
@@ -47,20 +48,17 @@ nav {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1.8rem;
     font-weight: bold;
-    color: #264768;
+    color: var(--text-primary);
     line-height: 1.1;
 }
 
 .subtitulo-app {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 0.85rem;
-    color: #5a5a5a;
+    color: var(--text-secondary);
     line-height: 1.1;
 }
 
-h2, label {
-    color: whitesmoke;
-}
 
 /*========  Menú  (Categoria/Carrito/ admin) ========*/
 .menu {
@@ -86,18 +84,21 @@ h2, label {
     font-size: 1rem;
     font-weight: bold;
 
-    color: #264768;
+    color: var(--text-primary);
     text-decoration: none;
     cursor: pointer;
 }
 
 .menu a:hover {
-    color: #6a93bb;
+    color: var(--hover-color);
 }
+
+
 
 #tablaventas{
     width: 100%;
 }
+
 
 #tablaventas th,
 #tablaventas td{

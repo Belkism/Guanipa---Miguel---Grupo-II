@@ -2,7 +2,9 @@
 body{
     margin: 0;
     padding: 20px;
-    background-color: #264768;
+    
+    background-color:var(--bg-body) !important;
+    color:var(--text-light);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -12,20 +14,88 @@ body{
     margin: 0;
  
 }
+.form-login{
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centra inputs y botones */
+    text-align: center;  /* centra labels */
+}
+
+.form-login .btn{
+    width: 100%;
+    max-width: 350px;
+}
+.container{
+    background:transparent !important;
+}
+.card{
+
+    width:100%;
+    max-width:450px;
+
+    display:flex;
+    justify-content:center;
+
+    box-shadow:var(--shadow);
+
+    background-color:var(--bg-card);
+    
+}
+
+.card-body{
+
+    width:100%;
+    
+
+    display:flex;
+    flex-direction:column;
+
+    gap:10px;
+    align-items:center;
+
+    background-color:var(--bg-card);
+
+    color:var(--text-primary);
+}
+
+input, 
+button{
+    width: 80%;
+    max-width: 350px;
+    text-align: center;
+    margin: 5px;
+}
+
+h3, p, label{
+    color: var(--text-primary) !important;
+}
 
 a {
     text-decoration: none;
+    color:var(--text-primary);
 }
 
 
 
 footer{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    padding: 20px;
-    background-color: #5defef;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    position:fixed;
+    bottom:0;
+    left:0;
+
+    width:100%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px;
+
+    background-color:var(--bg-navbar);
+    color:var(--text-primary);
+
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+footer small {
+    margin-right: auto;
 }

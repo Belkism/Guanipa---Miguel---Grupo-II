@@ -36,12 +36,14 @@ th {
 }
 
 #descargarLink {
+    display: inline-block;
     background-color: #264768;
     color: #fff;
     border: none;
     border-radius: 6px;
     padding: 8px 12px;
     cursor: pointer;
+    text-decoration: none;
 }
 .hidden {
     display: none;

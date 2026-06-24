@@ -3,11 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnLoginAdmin = document.getElementById("btnLoginAdmin");
     const inputNombre = document.getElementById("nombre");
     const aviso = document.getElementById("aviso");
-    const temaGuardado = localStorage.getItem("tema");
-
-    if(temaGuardado==="dark"){
-        document.body.classList.add("dark");
-    }
+   
 
     btnContinuar.addEventListener("click", () => {
         const nombre = inputNombre.value.trim();
@@ -15,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (error) {
             aviso.textContent = error;
-            aviso.style.color = "red";
+            aviso.style.color = rgb(237, 77, 77);
             return;
         }
 

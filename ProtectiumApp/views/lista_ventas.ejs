@@ -14,43 +14,72 @@
 <body>
 
     <header>
-        <nav class="nav">
-            <div class="contenedor"">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="contenedor container-fluid gap-3">
+
                 <div class="contenedor-logo">
-                    
-                    <button onclick="volverAInicio()">
+
+                    <button class="navbar-brand btn p-0" onclick="volverAInicio()">
                         <img src="/favicon2.jpg" alt="logoEmpresa">
-                    </button> 
-                       
+                    </button>
+
                     <div class="texto-logo">
                         <span class="titulo-app">Protectium App</span>
-                        <span class="subtitulo-app">Licencias originales, seguridad garantizada</span>
+                        <span class="subtitulo-app">
+                            Licencias originales, seguridad garantizada
+                        </span>
                     </div>
+
                 </div>
-                  
-                <ul class="menu">
-                    <li>
-                        <a href="/admin/dashboard">Panel</a>
-                    </li>
 
-                    <li>
-                        <a href="/admin/productos/crear" >
-                            + Nuevo
-                        </a>
-                    </li>
-                    <li>
-                        <button id="temaBtn" class="tema-btn">
-                            <span id="temaText">Tema</span>
-                        </button>
-                    </li>
+                <!-- hamburguesa -->
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#menuNav">
 
-                    <li>
-                        <a href="/auth/logout" >
-                             Salir
-                        </a>
-        
-                    </li>
-                </ul>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- menú -->
+                <div class="collapse navbar-collapse" id="menuNav">
+
+                    <ul class="menu navbar-nav ms-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                            href="/admin/dashboard">
+                                Panel
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                            href="/admin/productos/crear">
+                                + Nuevo
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <button id="temaBtn"
+                                    class="tema-btn nav-link btn p-0">
+                                <span id="temaText">
+                                    Tema
+                                </span>
+                            </button>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                            href="/auth/logout">
+                                Salir
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
             </div>
         </nav>
     </header>
@@ -111,7 +140,7 @@
                                     </td>
                                     <td class="col-producto">
                                         <% if (venta.productos && venta.productos.length > 0) { %>
-                                            <ul class="mb-0 ps-3">
+                                            <ul class="lista-productos mb-0 ps-3">
                                                 <% venta.productos.forEach(p => { %>
                                                     <li><%= p %></li>
                                                 <% }) %>
@@ -140,7 +169,7 @@
             <% } %>
         </div>
 
-         <script src="/js/lista_ventas.js"></script>
+    <script src="/js/lista_ventas.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>   
     <script src="/js/tema.js"></script>
 </body>

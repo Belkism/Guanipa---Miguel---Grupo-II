@@ -1,10 +1,9 @@
 window.volverAInicio = () => {
-    sessionStorage.clear();
-    window.location.href = "/";
+    window.location.href = "/auth/logout";
 }
 
 document.addEventListener("click", (e) => {
-    const botonEliminar = e.target.closest(".btn-eliminar");
+    const botonEliminar = e.target.closest(".btn-Eliminar");
     const botonReactivar = e.target.closest(".btn-reactivar");
 
     if (!botonEliminar && !botonReactivar) {

@@ -1,19 +1,19 @@
-
-body{
+body {
     margin: 0;
-    padding: 20px;
-    
-    background-color:var(--bg-body) !important;
-    color:var(--text-light);
+    padding: 0;
+    background-color: var(--bg-body) !important;
+    color: var(--text-light);
     min-height: 100vh;
+
     display: flex;
     flex-direction: column;
-    justify-content: center;
+
+    justify-content: flex-start; /* 🔥 cambio clave */
     align-items: center;
+
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin: 0;
- 
 }
+
 .form-login{
     display: flex;
     flex-direction: column;
@@ -43,18 +43,12 @@ body{
 }
 
 .card-body{
-
     width:100%;
-    
-
     display:flex;
     flex-direction:column;
-
-    gap:10px;
+    gap:5px;
     align-items:center;
-
     background-color:var(--bg-card);
-
     color:var(--text-primary);
 }
 
@@ -63,11 +57,15 @@ button{
     width: 80%;
     max-width: 350px;
     text-align: center;
-    margin: 5px;
+    margin: 0 5px;
 }
 
-h3, p, label{
-    color: var(--text-primary) !important;
+h3 {
+    color: var(--text-primary)!important;
+}
+
+p, label{
+    color: var(--text-primary);
 }
 
 a {
@@ -98,4 +96,19 @@ footer{
 
 footer small {
     margin-right: auto;
+}
+
+.error-container {
+    min-height: 10px; 
+}
+
+.alerta p {
+    color: rgb(237, 77, 77);
+}
+
+.login-wrapper {
+    min-height: calc(100vh - 80px); /* espacio real menos footer */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

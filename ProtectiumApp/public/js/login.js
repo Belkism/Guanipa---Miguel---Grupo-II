@@ -1,10 +1,20 @@
 const btnAccesoRapido = document.getElementById("btnAccesoRapido");
 
+const inputs = document.querySelectorAll("input");
+
+const avisoError = document.querySelector(".alerta");
+
 const params = new URLSearchParams(window.location.search);
 
-if (params.get("session") === "expirada") {
-    alert("Tu sesión expiró. Inicia sesión nuevamente.");
-    window.history.replaceState({}, document.title, "/auth/login");
+
+if (params.get("session") === "error") {
+    alert("Debes iniciar sesión nuevamente.");
+
+    window.history.replaceState(
+        {},
+        document.title,
+        "/auth/login"
+    );
 }
 
 btnAccesoRapido.addEventListener("click", () => {
@@ -14,4 +24,13 @@ btnAccesoRapido.addEventListener("click", () => {
 
     document.getElementById("password").value =
         "password123";
+});
+
+
+inputs.forEach(input => {
+    input.addEventListener("input", () => {
+        if (avisoError) {
+            avisoError.style.display = "none";
+        }
+    });
 });

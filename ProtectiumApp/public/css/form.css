@@ -4,43 +4,59 @@ body {
     color: var(--text-light);
 }
 
-nav {
-    width: 100%;
+.navbar-toggler{
+    border-color: var(--text-primary);
 }
 
-.contenedor {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* ícono */
+.navbar-toggler-icon{
+    background-image: none;
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+
+.navbar-toggler-icon::before{
+    content:"☰";
+    color: var(--text-primary);
+    font-size:24px;
+    position:absolute;
+    inset:0;
+}
+
+.contenedor{
+    width:100%;
     background-color: var(--bg-navbar);
-    padding: 20px 30px;
+    padding:20px 30px;
 }
 
 
 /* Imagen logo y titulo */
 .contenedor-logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
-.contenedor img {
-    width: 60px;
+.contenedor-logo img{
+    width:60px;
+    min-width:60px;
     display: block;
 }
-
 .contenedor button {
     background: transparent;
     border: none;
     padding: 0;
     cursor: pointer;
+    
 }
+
 
 .texto-logo {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    /* flex-shrink:0; */
 }
 
 
@@ -54,7 +70,7 @@ nav {
 
 .subtitulo-app {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 0.85rem;
+    font-size: .85rem;
     color: var(--text-secondary);
     line-height: 1.1;
 }
@@ -74,7 +90,8 @@ nav {
 }
 
 /* Mismo estilo para links y botones */
-.menu a {
+.menu a,
+#temaBtn {
     background: transparent;
     border: none;
     padding: 0;
@@ -89,8 +106,9 @@ nav {
     cursor: pointer;
 }
 
-.menu a:hover {
-    color: var(--hover-color);
+.menu a:hover,
+#temaBtn:hover{
+    color: var(--hover-color) !important;
 }
 
 
@@ -98,8 +116,24 @@ h1, p, h2, label{
     color: var(--text-primary) !important;
 }
 
+.btn-success,
+.btn-secondary{
+    width: 10rem;
+}
+
 
 #avisoError {
     color: rgb(218, 60, 60);
     
+}
+
+@media(max-width:991px){
+
+    .navbar-nav {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
 }

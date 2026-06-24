@@ -1,77 +1,114 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+body {
+    margin: 0;
+    background-color: var(--bg-body);
+    color: var(--text-light);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.navbar-toggler{
+    border-color: var(--text-primary);
 }
 
-body{
-    background-color:var(--bg-body);
+/* ícono */
+.navbar-toggler-icon{
+    background-image: none;
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+
+.navbar-toggler-icon::before{
+    content:"☰";
+    color: var(--text-primary);
+    font-size:24px;
+    position:absolute;
+    inset:0;
+}
+
+.contenedor {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-navbar);
+    padding: 20px 30px;
 }
 
 
-/* ===== NAVBAR ===== */
-
-nav{
-    width:100%;
+/* Imagen logo y titulo */
+.contenedor-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.contenedor{
-    width:100%;
+.contenedor img {
+    width: 60px;
+    display: block;
+}
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.contenedor button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
 
-    padding:20px 30px;
-
-    background-color:var(--bg-navbar);
+.texto-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 
-/* ===== LOGO ===== */
-
-.contenedor-logo{
-    display:flex;
-    align-items:center;
-    gap:15px;
+.titulo-app {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    line-height: 1.1;
 }
 
-.contenedor img{
-    width:60px;
-    display:block;
+.subtitulo-app {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.1;
 }
 
-.contenedor button,
-#btnLogo{
-    background:transparent;
-    border:none;
-    padding:0;
-    cursor:pointer;
+
+/*========  Menú  (Categoria/Carrito/ admin) ========*/
+.menu {
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
 }
 
-.texto-logo{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+.menu li {
+    list-style: none;
 }
 
-.titulo-app{
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size:1.8rem;
-    font-weight:bold;
+/* Mismo estilo para links y botones */
+.menu a,
+#temaBtn {
+    background: transparent;
+    border: none;
+    padding: 0;
 
-    color:var(--text-primary);
+    font: inherit;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
 
-    line-height:1.1;
+    color: var(--text-primary);
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.subtitulo-app{
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size:.85rem;
-
-    color:var(--text-secondary);
-
-    line-height:1.1;
+.menu a:hover,
+#temaBtn:hover {
+    color: var(--hover-color);
 }
 
 

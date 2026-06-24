@@ -7,6 +7,7 @@ function validarRegistro(req, res, next){
     const contrasena = req.body.contrasena || "";
     const telefono = req.body.telefono?.trim() || "";
     const rol = req.body.rol?.trim() || "";
+    
 
     if(!nombre){
         errores.push("Nombre obligatorio");
@@ -42,7 +43,9 @@ function validarRegistro(req, res, next){
         rol
     };
 
+
     next();
 }
+
 
 module.exports = validarRegistro;

@@ -13,34 +13,114 @@
 <body>
 
     <header>
-        <nav class="nav">
-            <div class="contenedor">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="contenedor container-fluid gap-3">
+
+                <!-- Logo -->
                 <div class="contenedor-logo">
-                    <button onclick="volverAInicio()">
-                        <img src="./favicon2.jpg" alt="logoEmpresa">
-                    </button>   
+
+                    <button class="navbar-brand btn p-0"
+                            onclick="volverAInicio()">
+
+                        <img src="./favicon2.jpg"
+                            alt="logoEmpresa">
+
+                    </button>
+
                     <div class="texto-logo">
-                        <span class="titulo-app">Protectium App</span>
-                        <span class="subtitulo-app">Licencias originales, seguridad garantizada</span>
+                        <span class="titulo-app">
+                            Protectium App
+                        </span>
+
+                        <span class="subtitulo-app">
+                            Licencias originales, seguridad garantizada
+                        </span>
                     </div>
+
                 </div>
-                  
-                <ul class="menu">
-                    <li class="dropdown">
-                        <button id="btnMenu">Categorías</button>
-                        <ul class="submenu">
-                            <li><button id="btnSeguridad" data-categoria="seguridad">Seguridad</button></li>
-                            <li><button id="btnProductividad" data-categoria="productividad">Productividad</button></li>
-                        </ul>
-                    </li>
-                    <li><a class="linkCarrito" href="carrito.html">Carrito</a></li>
-                    <li class="nav-item"><a class="linkLogin" href="/auth/login">Login Admin</a></li>
-                    <li>
-                        <button id="temaBtn" class="tema-btn">
-                            <span id="temaText">Tema</span>
-                        </button>
-                    </li>
-                </ul>
+
+                <!-- Hamburguesa -->
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#menuNav">
+
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menú -->
+                <div class="collapse navbar-collapse" id="menuNav">
+
+                    <ul class="menu navbar-nav ms-auto">
+
+                        <!-- Categorías dropdown -->
+                        <li class="nav-item dropdown">
+
+                            <button
+                                class="nav-link dropdown-toggle btn"
+                                id="btnMenu"
+                                data-bs-toggle="dropdown">
+
+                                Categorías
+                            </button>
+
+                            <ul class="dropdown-menu">
+
+                                <li>
+                                    <button
+                                        class="dropdown-item"
+                                        id="btnSeguridad"
+                                        data-categoria="seguridad">
+
+                                        Seguridad
+                                    </button>
+                                </li>
+
+                                <li>
+                                    <button
+                                        class="dropdown-item"
+                                        id="btnProductividad"
+                                        data-categoria="productividad">
+
+                                        Productividad
+                                    </button>
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link linkCarrito"
+                            href="carrito.html">
+
+                                Carrito
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link linkLogin"
+                            href="/auth/login">
+
+                                Login Admin
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <button id="temaBtn"
+                                    class="tema-btn nav-link btn">
+
+                                <span id="temaText">
+                                    Tema
+                                </span>
+
+                            </button>
+                        </li>
+
+                    </ul>
+
+                </div>
+
             </div>
         </nav>
     </header>

@@ -1,43 +1,33 @@
 
-/* Dropdown */
-
-.dropdown{
-    position:relative;
-    z-index:10;
+.dropdown-menu{
+    background-color: var(--bg-card);
+    border:none;
 }
 
-.submenu{
-
-    display:none;
-    position:absolute;
-
-    top:100%;
-    left:0;
-
-    min-width:180px;
-
-    background:var(--bg-submenu);
-
-    box-shadow:var(--shadow);
-
-    margin:0;
-    padding:0;
+.dropdown-item{
+    color: var(--text-primary);
 }
 
-.submenu li{
-    width:100%;
+.dropdown-item:hover{
+    background-color: var(--hover-color);
+    color:white;
 }
 
-.submenu button{
-    width:100%;
-    text-align:left;
-    padding:10px 15px;
+.dropdown-toggle,
+.dropdown-toggle:focus,
+.dropdown-toggle:active,
+.dropdown-toggle.show{
+
+    color: var(--text-primary) !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
 }
 
-.dropdown:hover .submenu{
-    display:block;
-}
 
+/* Sacar borde azul del click */
+.dropdown-toggle:focus{
+    outline:none;
+}
 
 /* Productos */
 
@@ -141,4 +131,15 @@ h2{
 .page-item .page-link:hover{
     background-color: var(--hover-color);
     color: white;
+}
+
+@media (max-width: 991px) {
+
+  .navbar-nav {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
 }

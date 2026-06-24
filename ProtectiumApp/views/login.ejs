@@ -12,7 +12,7 @@
 </head>
 <body>
 
-    <div class="container vh-100 d-flex justify-content-center align-items-start pt-5">
+    <div class="container d-flex justify-content-center align-items-center login-wrapper">
         <div class="card border-0" style="width: 400px;">           
             <div class="card-body p-4">
                 <div class="text-center mb-3">
@@ -27,15 +27,17 @@
                 <h3 class="text-center mb-1">
                     PROTECTIUM APP
                 </h3>
-                <p class="text-center mb-4">
+                <p class="text-center mb-1">
                     Panel de Administración
                 </p>
 
-                <% if(typeof error !== 'undefined'){ %>
-                    <div class="alert alert-danger">
-                        <%= error %>
-                    </div>
-                <% } %>
+                <div class="error-container">
+                    <% if (typeof error !== 'undefined') { %>
+                        <div class="alerta">
+                            <p><%= error %></p>
+                        </div>
+                    <% } %>
+                </div>
 
                 <form class="form-login" action="/auth/login" method="POST">
                     <div class="mb-3">

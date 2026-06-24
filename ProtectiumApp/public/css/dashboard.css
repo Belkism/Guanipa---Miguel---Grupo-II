@@ -2,10 +2,26 @@ body {
     margin: 0;
     background-color: var(--bg-body);
     color: var(--text-light);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.navbar-toggler{
+    border-color: var(--text-primary);
 }
 
-nav {
-    width: 100%;
+/* ícono */
+.navbar-toggler-icon{
+    background-image: none;
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+
+.navbar-toggler-icon::before{
+    content:"☰";
+    color: var(--text-primary);
+    font-size:24px;
+    position:absolute;
+    inset:0;
 }
 
 .contenedor {
@@ -74,7 +90,8 @@ nav {
 }
 
 /* Mismo estilo para links y botones */
-.menu a {
+.menu a,
+#temaBtn {
     background: transparent;
     border: none;
     padding: 0;
@@ -89,7 +106,8 @@ nav {
     cursor: pointer;
 }
 
-.menu a:hover {
+.menu a:hover,
+#temaBtn:hover {
     color: var(--hover-color);
 }
 
@@ -149,35 +167,73 @@ nav {
     display: none;
 }
 
-.btnEditar {
+.editar {
     background-color: var(--text-secondary);
     color: whitesmoke;
     border: none;
     padding: 6px 12px;
     border-radius: 6px;
-    font-weight: bold;
     text-decoration: none;
     display: inline-block;
     cursor: pointer;
-    transition: 0.3s ease;
 }
 
-.btnEditar:hover {
+.editar:hover {
     background-color: var(--hover-color);
     color: white;
 }
 
-.btnEliminar {
+.btn-Eliminar {
     background-color: #c0392b;
     color: whitesmoke;
     border: none;
     padding: 6px 12px;
     border-radius: 6px;
-    font-weight: bold;
     cursor: pointer;
-    transition: 0.3s ease;
 }
 
-.btnEliminar:hover {
+.btn-Eliminar:hover {
     background-color: #e74c3c;
+}
+
+.d-flex.gap-2 a,
+.d-flex.gap-2 button {
+    min-width: 110px;
+    text-align: center;
+}
+
+
+@media (max-width: 991px) {
+
+  .navbar-nav {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+ 
+  .card .d-flex.gap-2 {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+    min-width: 130px;
+  }
+
+  .card .d-flex.gap-2 a,
+  .card .d-flex.gap-2 button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .col-md-10.d-flex {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .col-md-10 .mb-1,
+  .col-md-10 small {
+    text-align: left;
+  }
 }
